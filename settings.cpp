@@ -10,7 +10,8 @@ const QString Settings::LANGUAGE_KEY = "language";
 Settings::Settings()
     : language("ru"),
       soundEnabled(true),
-      theme("default")
+      theme("default"),
+      placementStrategy("random")
 {
     Settings::load();
 }
@@ -23,6 +24,7 @@ std::shared_ptr<Settings> Settings::clone() const {
     cloned->language = this->language;
     cloned->soundEnabled = this->soundEnabled;
     cloned->theme = this->theme;
+    cloned->placementStrategy = this->placementStrategy;
 
     return cloned;
 }
@@ -89,6 +91,10 @@ const QString& Settings::getTheme() const {
     return theme;
 }
 
+QString Settings::getPlacementStrategy() const {
+    return placementStrategy;
+}
+
 // Сеттеры //
 void Settings::setLanguage(const QString& lang) {
     if (lang != language) {
@@ -107,4 +113,8 @@ void Settings::setTheme(const QString& themeName) {
         theme = themeName;
         save();
     }
+}
+
+void Settings::setPlacementStrategy(const QString& strategy) {
+    placementStrategy = strategy;
 }

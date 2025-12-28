@@ -474,9 +474,21 @@
 			null
 		],
 		[
+			"C:/QtProjects/MinesweeperProject/attemptsplacementstrategy.hpp",
+			"MU",
+			"EWIEGA46WW/moc_attemptsplacementstrategy.cpp",
+			null
+		],
+		[
 			"C:/QtProjects/MinesweeperProject/cell.hpp",
 			"MU",
 			"EWIEGA46WW/moc_cell.cpp",
+			null
+		],
+		[
+			"C:/QtProjects/MinesweeperProject/clusteredplacement.hpp",
+			"MU",
+			"EWIEGA46WW/moc_clusteredplacement.cpp",
 			null
 		],
 		[
@@ -528,15 +540,33 @@
 			null
 		],
 		[
-			"C:/QtProjects/MinesweeperProject/mineplacer.hpp",
+			"C:/QtProjects/MinesweeperProject/mineplacementfactory.hpp",
 			"MU",
-			"EWIEGA46WW/moc_mineplacer.cpp",
+			"EWIEGA46WW/moc_mineplacementfactory.cpp",
+			null
+		],
+		[
+			"C:/QtProjects/MinesweeperProject/mineplacementstrategy.hpp",
+			"MU",
+			"EWIEGA46WW/moc_mineplacementstrategy.cpp",
+			null
+		],
+		[
+			"C:/QtProjects/MinesweeperProject/nosafeplacement.hpp",
+			"MU",
+			"EWIEGA46WW/moc_nosafeplacement.cpp",
 			null
 		],
 		[
 			"C:/QtProjects/MinesweeperProject/point.hpp",
 			"MU",
 			"EWIEGA46WW/moc_point.cpp",
+			null
+		],
+		[
+			"C:/QtProjects/MinesweeperProject/randommineplacement.hpp",
+			"MU",
+			"EWIEGA46WW/moc_randommineplacement.cpp",
 			null
 		],
 		[
@@ -567,6 +597,12 @@
 			"C:/QtProjects/MinesweeperProject/themestyles.hpp",
 			"MU",
 			"EWIEGA46WW/moc_themestyles.cpp",
+			null
+		],
+		[
+			"C:/QtProjects/MinesweeperProject/windowswitcher.hpp",
+			"MU",
+			"EWIEGA46WW/moc_windowswitcher.cpp",
 			null
 		]
 	],
@@ -645,7 +681,13 @@
 	"SOURCES" : 
 	[
 		[ "C:/QtProjects/MinesweeperProject/aboutprogram.cpp", "MU", null ],
+		[
+			"C:/QtProjects/MinesweeperProject/attemptsplacementstrategy.cpp",
+			"MU",
+			null
+		],
 		[ "C:/QtProjects/MinesweeperProject/cell.cpp", "MU", null ],
+		[ "C:/QtProjects/MinesweeperProject/clusteredplacement.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/difficulty.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/game.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/gamefield.cpp", "MU", null ],
@@ -654,8 +696,18 @@
 		[ "C:/QtProjects/MinesweeperProject/howtoplay.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/main.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/mainwindow.cpp", "MU", null ],
-		[ "C:/QtProjects/MinesweeperProject/mineplacer.cpp", "MU", null ],
+		[
+			"C:/QtProjects/MinesweeperProject/mineplacementfactory.cpp",
+			"MU",
+			null
+		],
+		[ "C:/QtProjects/MinesweeperProject/nosafeplacement.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/point.cpp", "MU", null ],
+		[
+			"C:/QtProjects/MinesweeperProject/randommineplacement.cpp",
+			"MU",
+			null
+		],
 		[ "C:/QtProjects/MinesweeperProject/settings.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/settingswindow.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/statistics.cpp", "MU", null ],

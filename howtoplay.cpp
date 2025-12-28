@@ -10,9 +10,3 @@ HowToPlay::HowToPlay(QWidget *parent)
 }
 
 HowToPlay::~HowToPlay() = default;
-
-void HowToPlay::showDialog(QWidget *parent)
-{
-    HowToPlay dialog(parent);
-    dialog.exec();
-}

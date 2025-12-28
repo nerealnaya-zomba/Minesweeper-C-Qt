@@ -8,26 +8,12 @@ StatisticsWindow::StatisticsWindow(std::shared_ptr<Statistics> statistics, QWidg
     ui(std::make_unique<Ui::StatisticsWindow>()),
     gameStatistics(statistics)
 {
-
     ui->setupUi(this);
-
-    setWindowTitle("Статистика");
-
-    setupConnections();
-
+    setWindowTitle(tr("Statistics"));
     updateUI();
-
 }
 
 StatisticsWindow::~StatisticsWindow() = default;
-
-void StatisticsWindow::setupConnections() {
-
-    connect(ui->resetButton, &QPushButton::clicked, this, &StatisticsWindow::on_resetButton_clicked);
-
-    // connect(statisticsWindow, &StatisticsWindow::windowClosed, statisticsWindow, &QObject::deleteLater);
-
-}
 
 void StatisticsWindow::updateUI() {
 
@@ -43,14 +29,14 @@ void StatisticsWindow::updateUI() {
     int bestTime = gameStatistics->getBestTime();
     ui->bestTimeLabel->setText(
         bestTime > 0
-        ? QString("%1 сек").arg(bestTime)
+        ? QString(tr("%1 sec")).arg(bestTime)
         : "-"
     );
 
     double avgTime = gameStatistics->getAverageTime();
     ui->avgTimeLabel->setText(
         avgTime > 0
-        ? QString("%1 сек").arg(avgTime, 0, 'f', 1)
+        ? QString(tr("%1 sec")).arg(avgTime, 0, 'f', 1)
         : "-"
     );
 
@@ -60,8 +46,8 @@ void StatisticsWindow::on_resetButton_clicked() {
 
     QMessageBox::StandardButton reply = QMessageBox::question(
         this,
-        "Сброс статистики",
-        "Вы уверены, что хотите сбросить всю статистику?",
+        tr("Reset statistics"),
+        tr("Are you sure you want to reset all your statistics?"),
         QMessageBox::Yes | QMessageBox::No
         );
 
@@ -72,17 +58,4 @@ void StatisticsWindow::on_resetButton_clicked() {
         }
     }
 
-}
-
-void StatisticsWindow::showDialog(std::shared_ptr<Statistics> statistics, QWidget* parent) {
-
-    StatisticsWindow* dialog = new StatisticsWindow(statistics, parent);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->show();
-
-}
-
-void StatisticsWindow::closeEvent(QCloseEvent *event) {
-    emit windowClosed();
-    QDialog::closeEvent(event);
 }

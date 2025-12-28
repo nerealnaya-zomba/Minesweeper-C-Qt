@@ -1,11 +1,13 @@
 #include "game.hpp"
 
-Game::Game(const Difficulty& difficulty, const Settings& settings, std::shared_ptr<Statistics> externalStatistics)
+Game::Game(const Difficulty& difficulty, const Settings& settings,
+           std::shared_ptr<Statistics> externalStatistics,
+           const QString& strategyName)
 
     : currentDifficulty(difficulty),
       currentSettings(settings),
-      minePlacer(),
-      field(difficulty, minePlacer),
+      minePlacer(MinePlacementFactory::createStrategy(strategyName)),
+      field(difficulty, nullptr),
       timer(),
       gameStatistics(externalStatistics),
       gameState(GameState::Waiting),
@@ -24,8 +26,17 @@ void Game::startGame(const Point& safeStartPoint) {
 
     int numMinesToPlace = currentDifficulty.getMines();
 
-    minePlacer.placeMines(field, numMinesToPlace, safeStartPoint);
+    minePlacer->placeMines(field, numMinesToPlace, safeStartPoint);
+
     field.countAdjacentMines();
+
+    if (field.getCell(safeStartPoint.getX(), safeStartPoint.getY())->getIsMine())
+    {
+        // Если мина попала в первую ячейку (это возможно только при NoSafePlacement)
+        endGame(false); // Игра проиграна
+        // endGame остановит таймер и установит gameState=Lost
+        return; // Прерываем запуск игры
+    }
 
     field.revealCell(safeStartPoint);
 
@@ -139,4 +150,16 @@ void Game::setCurrentDifficulty(const Difficulty& newDifficulty) {
 
 void Game::setCurrentSettings(const Settings& newSettings) {
     this->currentSettings = newSettings;
+}
+
+// Установка стратегии по имени //
+void Game::setMinePlacementStrategy(const QString& strategyName)
+{
+    minePlacer = MinePlacementFactory::createStrategy(strategyName);
+}
+
+// Установка готовой стратегии //
+void Game::setMinePlacementStrategy(std::unique_ptr<MinePlacementStrategy> strategy)
+{
+    minePlacer = std::move(strategy);
 }

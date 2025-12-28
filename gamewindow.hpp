@@ -44,8 +44,10 @@ public:
     void onLeftClick(int x, int y);
     void onRightClick(int x, int y);
 
+    void updateWindowTitle();
     void updateField();
     void updateCell(int x, int y);
+    void updateSmileIcon();
     void updateMinesCounter();
 
     QPushButton* getButtonAt(int x, int y);
@@ -54,8 +56,11 @@ public:
     int calculateOptimalCellSize(int width, int height) const;
 
     void changeDifficulty(const Difficulty& newDifficulty);
+
     void showSettingsWindow();
+    void applyGameSettings();
     void updateMenuLanguage();
+
     void showStatisticsWindow();
 
     void closeEvent(QCloseEvent* event) override;
@@ -64,6 +69,7 @@ public:
 private slots:
 
     void on_restartButton_clicked();
+    void setMinePlacementStrategy(const QString& strategyName);
 
 signals:
 

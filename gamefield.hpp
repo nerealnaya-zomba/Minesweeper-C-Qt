@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cell.hpp"
-#include "mineplacer.hpp"
+#include "mineplacementstrategy.hpp"
 #include "difficulty.hpp"
 #include "point.hpp"
 #include <vector>
@@ -16,10 +16,11 @@ private:
     int flagsPlaced;
     int width;
     int height;
+    std::shared_ptr<MinePlacementStrategy> minePlacer;
 
 public:
 
-    GameField(const Difficulty& difficulty, MinePlacer& minePlacer);
+    GameField(const Difficulty& difficulty, std::shared_ptr<MinePlacementStrategy> minePlacerPtr);
 
     GameField(const GameField& other);
 

@@ -10,9 +10,3 @@ AboutProgram::AboutProgram(QWidget* parent)
 }
 
 AboutProgram::~AboutProgram() = default;
-
-void AboutProgram::showDialog(QWidget* parent)
-{
-    AboutProgram dialog(parent);
-    dialog.exec();
-}

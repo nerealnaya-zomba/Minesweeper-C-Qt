@@ -2,18 +2,18 @@
 
 #include "gamefield.hpp"
 #include "gametimer.hpp"
-#include "mineplacer.hpp"
 #include "difficulty.hpp"
 #include "settings.hpp"
 #include "statistics.hpp"
 #include "point.hpp"
 #include "gamestate.hpp"
+#include "mineplacementfactory.hpp"
 
 class Game
 {
 private:
 
-    MinePlacer minePlacer;
+    std::shared_ptr<MinePlacementStrategy> minePlacer;
     GameField field;
     GameTimer timer;
     Difficulty currentDifficulty;
@@ -24,7 +24,11 @@ private:
 
 public:
 
-    Game(const Difficulty& difficulty, const Settings& settings, std::shared_ptr<Statistics> statistics);
+    Game(const Difficulty& difficulty,
+         const Settings& settings,
+         std::shared_ptr<Statistics> externalStatistics,
+         const QString& strategyName = "random");
+
     ~Game();
 
     void startGame(const Point& safeStartPoint);
@@ -42,5 +46,8 @@ public:
 
     void setCurrentDifficulty(const Difficulty& newDifficulty);
     void setCurrentSettings(const Settings& newSettings);
+
+    void setMinePlacementStrategy(const QString& strategyName);
+    void setMinePlacementStrategy(std::unique_ptr<MinePlacementStrategy> strategy);
 
 };

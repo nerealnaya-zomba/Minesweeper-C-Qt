@@ -36,13 +36,13 @@ int Difficulty::getMines() const {
 }
 
 Difficulty Difficulty::beginner() {
-    return Difficulty("Новичок", 9, 9, 10);
+    return Difficulty("Beginner", 9, 9, 10);
 }
 
 Difficulty Difficulty::intermediate() {
-    return Difficulty("Любитель", 16, 16, 30);
+    return Difficulty("Intermediate", 16, 16, 30);
 }
 
 Difficulty Difficulty::expert() {
-    return Difficulty("Эксперт", 30, 16, 99);
+    return Difficulty("Expert", 30, 16, 99);
 }

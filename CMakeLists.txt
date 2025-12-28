@@ -29,7 +29,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
         difficulty.hpp difficulty.cpp
         gamefield.hpp gamefield.cpp
         cell.hpp cell.cpp
-        mineplacer.hpp mineplacer.cpp
+        randommineplacement.hpp randommineplacement.cpp
         point.hpp point.cpp
         statistics.hpp statistics.cpp
         settings.hpp settings.cpp
@@ -42,6 +42,14 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
         aboutprogram.hpp aboutprogram.cpp aboutprogram.ui
         statisticswindow.hpp statisticswindow.cpp statisticswindow.ui
         resources.qrc
+        mineplacementstrategy.hpp
+        nosafeplacement.hpp nosafeplacement.cpp
+        clusteredplacement.cpp clusteredplacement.hpp
+        attemptsplacementstrategy.hpp attemptsplacementstrategy.cpp
+        mineplacementfactory.hpp mineplacementfactory.cpp
+        windowswitcher.hpp
+
+
     )
 
 # Define target properties for Android with Qt 6 as:

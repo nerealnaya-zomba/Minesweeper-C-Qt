@@ -17,6 +17,7 @@ protected:
     QString language;
     bool soundEnabled;
     QString theme;
+    QString placementStrategy;
 
 public:
 
@@ -31,9 +32,11 @@ public:
     const QString& getLanguage() const;
     bool getSoundEnabled() const;
     const QString& getTheme() const;
+    QString getPlacementStrategy() const;
 
     void setLanguage(const QString& language);
     void setSoundEnabled(bool enabled);
     void setTheme(const QString& themeName);
+    void setPlacementStrategy(const QString& strategy);
 
 };

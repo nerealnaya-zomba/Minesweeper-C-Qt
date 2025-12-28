@@ -11,6 +11,7 @@
 #include "settingswindow.hpp"
 #include "statisticswindow.hpp"
 #include "themestyles.hpp"
+#include "windowswitcher.hpp"
 
 QTranslator* MainWindow::appTranslator = nullptr;
 
@@ -23,13 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
       gameStatistics(std::make_shared<Statistics>())
 
 {
-
     ui->setupUi(this);
-
     applySettings();
     setupUI();
     setupConnections();
-
 }
 
 MainWindow::~MainWindow() = default;
@@ -62,11 +60,11 @@ void MainWindow::setupConnections() {
     });
 
     connect(ui->howToPlayTrigger, &QAction::triggered, this, [this]() {
-        HowToPlay::showDialog(this);
+        WindowSwitcher::switchToModal<HowToPlay>(this);
     });
 
     connect(ui->aboutProgramTrigger, &QAction::triggered, this, [this]() {
-        AboutProgram::showDialog(this);
+        WindowSwitcher::switchToModal<AboutProgram>(this);
     });
 
     connect(this, &MainWindow::languageChanged, this, &MainWindow::onLanguageChanged);
@@ -111,45 +109,24 @@ void MainWindow::applySettings() {
 
 }
 
+// Начать игру //
 void MainWindow::on_startGameButton_clicked() {
-
-    // Создаём окно с игрой и передаём параметры игры по умолчанию "Новичок" //
-    GameWindow* gameWindow = new GameWindow(currentDifficulty, currentSettings, gameStatistics, this);
-
-    connect(gameWindow, &GameWindow::windowClosed, this, &MainWindow::show);
-
-    connect(gameWindow, &GameWindow::windowClosed, gameWindow, &QObject::deleteLater);
-
-    connect(gameWindow, &GameWindow::languageChanged, this, &MainWindow::applySettings);
-
-    gameWindow->show();
-    this->hide();
+    GameWindow* gameWindow = WindowSwitcher::switchTo<GameWindow>(this, currentDifficulty, currentSettings, gameStatistics);
+    connect(gameWindow, &GameWindow::languageChanged, this, &MainWindow::applySettings); // Подключаем сигнал о смене языка
 }
 
+// Открыть настройки игры //
 void MainWindow::on_settingsButton_clicked() {
-
-    SettingsWindow* settingsWindow = new SettingsWindow(currentSettings, this);
-
-    // Подключаем сигнал о смене настроек //
-    connect(settingsWindow, &SettingsWindow::settingsChanged, this, &MainWindow::applySettings);
-
-    connect(settingsWindow, &SettingsWindow::settingsChanged, this, &MainWindow::applySettings);
-
-    // При закрытии окна просто показываем главное меню
-    connect(settingsWindow, &SettingsWindow::windowClosed, this, [this, settingsWindow]() {
-        this->show();
-        settingsWindow->deleteLater();
-    });
-
-    settingsWindow->setModal(true);
-    settingsWindow->show();
-    this->hide();
+    SettingsWindow* settingsWindow = WindowSwitcher::switchTo<SettingsWindow>(this, currentSettings);
+    connect(settingsWindow, &SettingsWindow::settingsChanged, this, &MainWindow::applySettings); // Подключаем сигнал о смене настроек
 }
 
+// Открыть статистику игры //
 void MainWindow::on_statisticsButton_clicked() {
-    StatisticsWindow::showDialog(gameStatistics, this);
+    StatisticsWindow* statisticsWindow = WindowSwitcher::switchTo<StatisticsWindow>(this, gameStatistics);
 }
 
+// Выход из игры //
 void MainWindow::on_quitButton_clicked() {
     close();
 }

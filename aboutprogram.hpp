@@ -16,9 +16,7 @@ private:
 
 public:
 
-    explicit AboutProgram(QWidget *parent = nullptr);
+    explicit AboutProgram(QWidget* parent = nullptr);
     ~AboutProgram();
-
-    static void showDialog(QWidget* parent = nullptr);
 
 };

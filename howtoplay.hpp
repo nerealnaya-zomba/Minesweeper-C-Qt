@@ -19,6 +19,4 @@ public:
     explicit HowToPlay(QWidget* parent = nullptr);
     ~HowToPlay();
 
-    static void showDialog(QWidget* parent = nullptr);
-
 };

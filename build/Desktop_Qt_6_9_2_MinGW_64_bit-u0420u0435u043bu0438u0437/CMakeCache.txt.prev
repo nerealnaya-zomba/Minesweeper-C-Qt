@@ -352,6 +352,9 @@ Qt6GuiTools_DIR:PATH=C:/Qt1/6.9.2/mingw_64/lib/cmake/Qt6GuiTools
 //The directory containing a CMake configuration file for Qt6Gui.
 Qt6Gui_DIR:PATH=C:/Qt1/6.9.2/mingw_64/lib/cmake/Qt6Gui
 
+//The directory containing a CMake configuration file for Qt6LinguistTools.
+Qt6LinguistTools_DIR:PATH=C:/Qt1/6.9.2/mingw_64/lib/cmake/Qt6LinguistTools
+
 //The directory containing a CMake configuration file for Qt6SvgPrivate.
 Qt6SvgPrivate_DIR:PATH=C:/Qt1/6.9.2/mingw_64/lib/cmake/Qt6SvgPrivate
 
@@ -1371,4 +1374,5 @@ Vulkan_LIBRARY-ADVANCED:INTERNAL=1
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/MinesweeperProject
+_Qt6_LINGUIST_TOOLS_DIR:INTERNAL=C:/Qt1/6.9.2/mingw_64/lib/cmake/Qt6LinguistTools
 

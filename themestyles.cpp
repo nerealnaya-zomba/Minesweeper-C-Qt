@@ -69,6 +69,9 @@ QString ThemeStyles::darkStyleSheet() {
             background-color: #3d3d3d;
             color: white;
         }
+        QGroupBox {
+            color: white;
+        }
     )";
 }
 
@@ -108,6 +111,9 @@ QString ThemeStyles::darkPreviewStyleSheet() {
         QGroupBox {
             color: white;
         }
+        QFrame {
+            background-color: #2d2d2d;
+        }
     )";
 }
 
@@ -131,6 +137,9 @@ QString ThemeStyles::lightPreviewStyleSheet() {
         }
         QGroupBox {
             color: black;
+        }
+        QFrame {
+            background-color: #f0f0f0;
         }
     )";
 }

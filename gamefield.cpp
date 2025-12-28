@@ -1,12 +1,13 @@
 #include "gamefield.hpp"
 
-GameField::GameField(const Difficulty& difficulty, MinePlacer& minePlacer)
+GameField::GameField(const Difficulty& difficulty, std::shared_ptr<MinePlacementStrategy> minePlacerPtr)
 
     : totalMines(0),
       cellsRevealed(0),
       flagsPlaced(0),
       width(difficulty.getWidth()),
-      height(difficulty.getHeight())
+      height(difficulty.getHeight()),
+      minePlacer(minePlacerPtr)
 {
 
     grid.resize(height); // Создаём 'height' строк
@@ -26,7 +27,8 @@ GameField::GameField(const GameField& other)
       cellsRevealed(other.cellsRevealed),
       flagsPlaced(other.flagsPlaced),
       width(other.width),
-      height(other.height)
+      height(other.height),
+      minePlacer(other.minePlacer)
 {
 
     grid.resize(height);

@@ -51,7 +51,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 31,
+				"line" : 25,
 				"parent" : 0
 			},
 			{
@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 117,
+				"line" : 112,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 96,
+				"line" : 91,
 				"parent" : 0
 			},
 			{
@@ -411,7 +411,8 @@
 				45,
 				48,
 				50,
-				59
+				53,
+				61
 			]
 		}
 	],
@@ -559,7 +560,8 @@
 				45,
 				48,
 				50,
-				59
+				53,
+				61
 			]
 		},
 		{
@@ -590,11 +592,12 @@
 				49,
 				51,
 				52,
-				53,
 				54,
 				55,
 				56,
-				57
+				57,
+				58,
+				59
 			]
 		},
 		{
@@ -620,15 +623,15 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				58
+				60
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				60,
-				61
+				62,
+				63
 			]
 		}
 	],
@@ -916,6 +919,17 @@
 			"backtrace" : 4,
 			"path" : "windowswitcher.hpp",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "strategy.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "strategy.cpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,

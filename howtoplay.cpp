@@ -6,7 +6,6 @@ HowToPlay::HowToPlay(QWidget *parent)
     ui(std::make_unique<Ui::HowToPlay>())
 {
     ui->setupUi(this);
-    setWindowTitle("Как играть");
 }
 
 HowToPlay::~HowToPlay() = default;

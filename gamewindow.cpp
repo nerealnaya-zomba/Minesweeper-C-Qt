@@ -2,6 +2,7 @@
 #include "ui_gamewindow.h"
 
 #include <QMessageBox>
+#include <QMouseEvent>
 #include <QScreen>
 
 #include "aboutprogram.hpp"
@@ -18,6 +19,7 @@ const QMap<int, QString> GameWindow::NUMBER_COLORS = {
 };
 
 GameWindow::GameWindow(const Difficulty& currentDifficulty,
+                       const Strategy& currentStrategy,
                        std::shared_ptr<Settings> settings,
                        std::shared_ptr<Statistics> statistics,
                        QWidget* parent)
@@ -25,14 +27,14 @@ GameWindow::GameWindow(const Difficulty& currentDifficulty,
     : QMainWindow(parent),
       ui(std::make_unique<Ui::GameWindow>()),
       game(nullptr),
-      currentSettings(settings)
+      currentSettings(settings),
+      leftButtonPressed(false),
+      rightButtonPressed(false)
 {
 
     ui->setupUi(this);
 
-    QString strategyName = currentSettings->getPlacementStrategy();
-
-    game = std::make_unique<Game>(currentDifficulty, *currentSettings, statistics, strategyName); // Создаём игру
+    game = std::make_unique<Game>(currentDifficulty, currentStrategy, *currentSettings, statistics); // Создаём игру
 
     setupUI(currentDifficulty); // Устанавливаем интерфейс
     createGameField(); // Создаём игровое поле
@@ -181,15 +183,17 @@ void GameWindow::createGameField() {
 
             buttons[y][x] = btn; // Сохраняем указатель в массив
 
+            btn->installEventFilter(this);
+
             // Левый клик по клетке //
             connect(btn, &QPushButton::clicked, [this, x, y]() {
-                onLeftClick(x, y);
+                handleMouseClick(x, y, Qt::LeftButton);
             });
 
             // Правый клик по клетке //
             btn->setContextMenuPolicy(Qt::CustomContextMenu);
             connect(btn, &QPushButton::customContextMenuRequested, [this, x, y]() {
-                onRightClick(x, y);
+                handleMouseClick(x, y, Qt::RightButton);
             });
 
             grid->addWidget(btn, y, x); // Добавляем в Layout
@@ -232,10 +236,17 @@ int GameWindow::calculateOptimalCellSize(int width, int height) const {
     return cellSize;
 }
 
-// Нажатие левой кнопкой мыши //
+/* // Нажатие левой кнопкой мыши //
 void GameWindow::onLeftClick(int x, int y) {
 
     if (!game) return;
+
+    Qt::MouseButtons currentButtons = QApplication::mouseButtons();
+
+    if (currentButtons == (Qt::LeftButton | Qt::RightButton)) {
+        onChordClick(x, y);
+        return;
+    }
 
     qDebug() << "Левый клик:" << x << y;
 
@@ -248,9 +259,9 @@ void GameWindow::onLeftClick(int x, int y) {
     updateField();
 
     if (game->getGameState() == GameState::Won) {
-        QMessageBox::information(this, "Победа!", "Вы выиграли!");
+        QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
     } else if (game->getGameState() == GameState::Lost) {
-        QMessageBox::information(this, "Поражение", "Мины!");
+        QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
         game->getGameField().revealAllMines();
         updateField();
     }
@@ -269,6 +280,72 @@ void GameWindow::onRightClick(int x, int y) {
 
 }
 
+void GameWindow::onChordClick(int x, int y) {
+
+    if (!game) return;
+
+    qDebug() << "Аккорд (левая+правая):" << x << y;
+
+    if (game->getGameState() == GameState::Running) {
+
+        game->chordClick(Point(x, y));
+        updateField();
+
+        if (game->getGameState() == GameState::Won) {
+            QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
+        } else if (game->getGameState() == GameState::Lost) {
+            QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
+            game->getGameField().revealAllMines();
+            updateField();
+        }
+    }
+
+}
+*/
+
+void GameWindow::handleMouseClick(int x, int y, Qt::MouseButton button) {
+
+    if (!game) return;
+
+    const Cell* cell = game->getGameField().getCell(x, y);
+    if (!cell) return;
+
+    qDebug() << "handleMouseClick:" << x << y << "button:" << button;
+
+    // Левый клик //
+    if (!cell->getIsRevealed()) {
+
+        if (button == Qt::LeftButton) {
+            qDebug() << "Левый клик на закрытой клетке";
+
+            if (game->getGameState() == GameState::Waiting) {
+                game->startGame(Point(x, y));
+            } else if (game->getGameState() == GameState::Running){
+                game->cellClick(Point(x, y));
+            }
+
+            updateField();
+
+            if (game->getGameState() == GameState::Won) {
+                QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
+            } else if (game->getGameState() == GameState::Lost) {
+                QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
+                game->getGameField().revealAllMines();
+                updateField();
+            }
+        }
+        // Правый клик //
+        else if (button == Qt::RightButton) {
+            game->flagToggle(Point(x, y));
+            updateCell(x, y);
+            updateMinesCounter();
+        }
+    } else {
+        qDebug() << "Клетка уже открыта - обычный клик игнорируется";
+    }
+
+}
+
 // Сменить сложность во время игры //
 void GameWindow::changeDifficulty(const Difficulty& newDifficulty) {
 
@@ -276,7 +353,7 @@ void GameWindow::changeDifficulty(const Difficulty& newDifficulty) {
 
     auto settings = game->getCurrentSettings();
     auto statistics = game->getStatistics();
-    QString currentStrategy = currentSettings->getPlacementStrategy();
+    Strategy currentStrategy = game->getCurrentStrategy();
 
     // Очищаем старое поле в UI //
     if (ui->gameArea->layout()) {
@@ -293,7 +370,7 @@ void GameWindow::changeDifficulty(const Difficulty& newDifficulty) {
     buttons.clear();
 
     // Создаём игру с новой сложностью //
-    game = std::make_unique<Game>(newDifficulty, *currentSettings, statistics, currentStrategy);
+    game = std::make_unique<Game>(newDifficulty, currentStrategy, *currentSettings, statistics);
 
     connect(&game->getTimer(), &GameTimer::timeUpdated, [this](const QString& time) {
         ui->timerLabel->setText(time); // Переподключаем таймер
@@ -311,8 +388,8 @@ void GameWindow::setMinePlacementStrategy(const QString& strategyName) {
 
     if (!game) return;
 
-    game->setMinePlacementStrategy(strategyName);
-    game->restartGame();
+    Strategy newStrategy(strategyName);
+    game->setCurrentStrategy(strategyName);
 
     updateField();
     updateMinesCounter();
@@ -348,8 +425,6 @@ void GameWindow::applyGameSettings() {
     updateWindowTitle();
 
 }
-
-
 
 // Показать окно статистики //
 void GameWindow::showStatisticsWindow() {
@@ -403,9 +478,11 @@ void GameWindow::updateCell(int x, int y) {
     btn->setIcon(QIcon());
     btn->setText("");
 
+    btn->setEnabled(true);
+
     if (cell->getIsRevealed()) { // Открытая клетка
 
-        btn->setEnabled(false);
+        // btn->setEnabled(false);
 
         if (cell->getIsMine()) { // Если клетка - мина
 
@@ -430,7 +507,7 @@ void GameWindow::updateCell(int x, int y) {
     }
     else { // Закрытая клетка
 
-        btn->setEnabled(true);
+        // btn->setEnabled(true);
 
         if (cell->getIsFlagged()) {
             btn->setText("🚩");
@@ -482,6 +559,93 @@ void GameWindow::on_restartButton_clicked() {
     updateMinesCounter();
 
     ui->timerLabel->setText("000");
+}
+
+bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
+
+    // Проверка что объект - кнопка игрового поля //
+    QPushButton* button = qobject_cast<QPushButton*>(obj);
+    if (!button) return QMainWindow::eventFilter(obj, event);
+
+    // Находим координаты кнопки //
+    int clickX = -1;
+    int clickY = -1;
+    for (int y = 0; y < buttons.size(); ++y) {
+        for (int x = 0; x < buttons[y].size(); ++x) {
+            if (buttons[y][x] == button) {
+                clickX = x;
+                clickY = y;
+                break;
+            }
+        }
+        if (clickX != -1) break;
+    }
+
+    if (clickX == -1 || clickY == -1) {
+        return QMainWindow::eventFilter(obj, event);
+    }
+
+    if (event->type() == QEvent::MouseButtonPress) {
+
+        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
+        qDebug() << "=== eventFilter: MouseButtonPress ===";
+        qDebug() << "Клетка:" << clickX << clickY;
+        qDebug() << "Кнопка мыши:" << mouseEvent->button();
+        qDebug() << "Все нажатые кнопки:" << mouseEvent->buttons();
+
+        // Левая кнопка //
+        if (mouseEvent->button() == Qt::LeftButton) {
+            leftButtonPressed = true;
+            lastMousePos = mouseEvent->globalPos();
+        }
+
+        // Правая кнопка //
+        if (mouseEvent->button() == Qt::RightButton) {
+            rightButtonPressed = true;
+            lastMousePos = mouseEvent->globalPos();
+        }
+
+        // Аккорд //
+        if (leftButtonPressed && rightButtonPressed) {
+            qDebug() << "АККОРД обнаружен через eventFilter!";
+
+            const Cell* cell = game->getGameField().getCell(clickX, clickY);
+            if (cell && game->getGameState() == GameState::Running) {
+                qDebug() << "Вызываем chordClick для клетки" << clickX << clickY;
+                game->chordClick(Point(clickX, clickY));
+                updateField();
+
+                if (game->getGameState() == GameState::Won) {
+                    QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
+                } else if (game->getGameState() == GameState::Lost) {
+                    QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
+                    game->getGameField().revealAllMines();
+                    updateField();
+                }
+            }
+
+            // Сбрасываем флаги после обработки аккорда
+            leftButtonPressed = false;
+            rightButtonPressed = false;
+            return true; // Событие обработано
+        }
+
+    }
+    else if (event->type() == QEvent::MouseButtonRelease) {
+
+        QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
+        if (mouseEvent->button() == Qt::LeftButton) {
+            leftButtonPressed = false;
+        }
+        if (mouseEvent->button() == Qt::RightButton) {
+            rightButtonPressed = false;
+        }
+    }
+
+    return QMainWindow::eventFilter(obj, event);
+
 }
 
 void GameWindow::changeEvent(QEvent* event)

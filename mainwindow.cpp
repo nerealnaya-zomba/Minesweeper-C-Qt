@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(std::make_unique<Ui::MainWindow>()),
       currentDifficulty(Difficulty::beginner()),
+      currentStrategy(Strategy::random()),
       currentSettings(std::make_shared<Settings>()),
       gameStatistics(std::make_shared<Statistics>())
 
@@ -56,6 +57,21 @@ void MainWindow::setupConnections() {
 
     connect(ui->expertDifficulty, &QAction::triggered, this, [this]() {
         currentDifficulty = Difficulty::expert();
+        on_startGameButton_clicked();
+    });
+
+    connect(ui->randomMode, &QAction::triggered, this, [this]() {
+        currentStrategy = Strategy::random();
+        on_startGameButton_clicked();
+    });
+
+    connect(ui->noSafeZoneMode, &QAction::triggered, this, [this]() {
+        currentStrategy = Strategy::noSafe();
+        on_startGameButton_clicked();
+    });
+
+    connect(ui->clusteredMode, &QAction::triggered, this, [this]() {
+        currentStrategy = Strategy::clustered();
         on_startGameButton_clicked();
     });
 
@@ -111,7 +127,7 @@ void MainWindow::applySettings() {
 
 // Начать игру //
 void MainWindow::on_startGameButton_clicked() {
-    GameWindow* gameWindow = WindowSwitcher::switchTo<GameWindow>(this, currentDifficulty, currentSettings, gameStatistics);
+    GameWindow* gameWindow = WindowSwitcher::switchTo<GameWindow>(this, currentDifficulty, currentStrategy, currentSettings, gameStatistics);
     connect(gameWindow, &GameWindow::languageChanged, this, &MainWindow::applySettings); // Подключаем сигнал о смене языка
 }
 

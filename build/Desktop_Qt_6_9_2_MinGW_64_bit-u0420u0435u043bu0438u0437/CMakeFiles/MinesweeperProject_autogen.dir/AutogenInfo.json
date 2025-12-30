@@ -594,6 +594,12 @@
 			null
 		],
 		[
+			"C:/QtProjects/MinesweeperProject/strategy.hpp",
+			"MU",
+			"EWIEGA46WW/moc_strategy.cpp",
+			null
+		],
+		[
 			"C:/QtProjects/MinesweeperProject/themestyles.hpp",
 			"MU",
 			"EWIEGA46WW/moc_themestyles.cpp",
@@ -712,6 +718,7 @@
 		[ "C:/QtProjects/MinesweeperProject/settingswindow.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/statistics.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/statisticswindow.cpp", "MU", null ],
+		[ "C:/QtProjects/MinesweeperProject/strategy.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/themestyles.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

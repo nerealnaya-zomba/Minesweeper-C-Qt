@@ -6,6 +6,7 @@
 #include "difficulty.hpp"
 #include "settings.hpp"
 #include "statistics.hpp"
+#include "strategy.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +24,7 @@ private:
 
     std::unique_ptr<Ui::MainWindow> ui;
     Difficulty currentDifficulty;
+    Strategy currentStrategy;
     std::shared_ptr<Settings> currentSettings;
     std::shared_ptr<Statistics> gameStatistics;
 

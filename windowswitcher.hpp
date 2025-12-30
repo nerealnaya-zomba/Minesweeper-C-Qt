@@ -17,16 +17,17 @@ public:
 
         if (!parent) {
             return createWindow<TWindow>(nullptr, std::forward<Args>(args)...);
-
         }
 
-        parent->hide();
+        parent->showMinimized();
 
         TWindow* newWindow = createWindow<TWindow>(parent, std::forward<Args>(args)...);
 
         setupParentRestoration(newWindow, parent);
 
         newWindow->show();
+        newWindow->raise();
+        newWindow->activateWindow();
 
         return newWindow;
 
@@ -70,16 +71,17 @@ private:
         return window;
     }
 
-    // Восстановить родительское окно //
+    // Соединить сигнал для восстановления родительского окна //
     static void setupParentRestoration(QWidget* newWindow, QWidget* parent) {
         QWidget::connect(newWindow, &QObject::destroyed, [parent]() {
             restoreParent(parent);
         });
     }
 
+    // Восстановить родительское окно //
     static void restoreParent(QWidget* parent) {
-        if (parent && !parent->isVisible()) {
-            parent->show();
+        if (parent && parent->isMinimized()) {
+            parent->showNormal();
             parent->raise();
             parent->activateWindow();
         }

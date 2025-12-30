@@ -9,7 +9,6 @@ StatisticsWindow::StatisticsWindow(std::shared_ptr<Statistics> statistics, QWidg
     gameStatistics(statistics)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Statistics"));
     updateUI();
 }
 
@@ -29,14 +28,14 @@ void StatisticsWindow::updateUI() {
     int bestTime = gameStatistics->getBestTime();
     ui->bestTimeLabel->setText(
         bestTime > 0
-        ? QString(tr("%1 sec")).arg(bestTime)
+        ? QString(tr("%1 сек")).arg(bestTime)
         : "-"
     );
 
     double avgTime = gameStatistics->getAverageTime();
     ui->avgTimeLabel->setText(
         avgTime > 0
-        ? QString(tr("%1 sec")).arg(avgTime, 0, 'f', 1)
+        ? QString(tr("%1 сек")).arg(avgTime, 0, 'f', 1)
         : "-"
     );
 
@@ -46,10 +45,10 @@ void StatisticsWindow::on_resetButton_clicked() {
 
     QMessageBox::StandardButton reply = QMessageBox::question(
         this,
-        tr("Reset statistics"),
-        tr("Are you sure you want to reset all your statistics?"),
+        tr("Сбросить статистику"),
+        tr("Вы уверены, что хотите сбросить всю статистику?"),
         QMessageBox::Yes | QMessageBox::No
-        );
+    );
 
     if (reply == QMessageBox::Yes) {
         if (gameStatistics) {

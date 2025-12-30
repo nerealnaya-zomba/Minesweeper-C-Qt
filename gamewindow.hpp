@@ -29,9 +29,14 @@ private:
     std::shared_ptr<Settings> currentSettings;
     QVector<QVector<QPointer<QPushButton>>> buttons; // Двумерный массив для клеток
 
+    bool leftButtonPressed;
+    bool rightButtonPressed;
+    QPoint lastMousePos;
+
 public:
 
     explicit GameWindow(const Difficulty& currentDifficulty,
+                        const Strategy& currentStrategy,
                         std::shared_ptr<Settings> settings,
                         std::shared_ptr<Statistics> statistics,
                         QWidget *parent = nullptr);
@@ -43,12 +48,16 @@ public:
 
     void onLeftClick(int x, int y);
     void onRightClick(int x, int y);
+    void onChordClick(int x, int y);
+
+    void handleMouseClick(int x, int y, Qt::MouseButton button);
 
     void updateWindowTitle();
     void updateField();
     void updateCell(int x, int y);
     void updateSmileIcon();
     void updateMinesCounter();
+    void updateMenuLanguage();
 
     QPushButton* getButtonAt(int x, int y);
 
@@ -59,12 +68,12 @@ public:
 
     void showSettingsWindow();
     void applyGameSettings();
-    void updateMenuLanguage();
 
     void showStatisticsWindow();
 
     void closeEvent(QCloseEvent* event) override;
     void changeEvent(QEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private slots:
 

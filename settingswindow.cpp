@@ -39,13 +39,9 @@ void SettingsWindow::initThemes() {
 
 // Установка интерфейса //
 void SettingsWindow::setupUI() {
-
     ui->themeImageLabel->setText("");
     ui->themeImageLabel->setFixedSize(64, 64);
     ui->themeImageLabel->setAlignment(Qt::AlignCenter);
-
-    setWindowTitle("Настройки");
-
 }
 
 // Подключение сигналов //
@@ -107,8 +103,7 @@ void SettingsWindow::loadSettingsToUI() {
 }
 
 // Обновление интерфейса темы //
-void SettingsWindow::updateThemeDisplay()
-{
+void SettingsWindow::updateThemeDisplay() {
 
     if (themes.isEmpty() || currentThemeIndex < 0 || currentThemeIndex >= themes.size()) {
         return;
@@ -145,8 +140,8 @@ void SettingsWindow::applyThemePreview() {
 }
 
 // Предпоказ выбранного языка //
-void SettingsWindow::applyLanguagePreview()
-{
+void SettingsWindow::applyLanguagePreview() {
+
     if (!tempSettings) return;
 
     QString langId = tempSettings->getLanguage();
@@ -256,8 +251,7 @@ void SettingsWindow::on_nextButton_clicked() {
 }
 
 // Событие при закрытии окна //
-void SettingsWindow::closeEvent(QCloseEvent* event)
-{
+void SettingsWindow::closeEvent(QCloseEvent* event) {
     emit windowClosed();
     QDialog::closeEvent(event);
 }

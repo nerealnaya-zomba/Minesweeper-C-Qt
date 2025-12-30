@@ -378,5 +378,7 @@ C:/QtProjects/MinesweeperProject/build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u
   C:/Qt1/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt1/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/QtProjects/MinesweeperProject/difficulty.hpp \
+  C:/QtProjects/MinesweeperProject/mineplacementstrategy.hpp \
   C:/QtProjects/MinesweeperProject/settings.hpp \
-  C:/QtProjects/MinesweeperProject/statistics.hpp
+  C:/QtProjects/MinesweeperProject/statistics.hpp \
+  C:/QtProjects/MinesweeperProject/strategy.hpp

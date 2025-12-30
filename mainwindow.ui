@@ -255,9 +255,19 @@
      <addaction name="intermediateDifficulty"/>
      <addaction name="expertDifficulty"/>
     </widget>
+    <widget class="QMenu" name="menu_4">
+     <property name="title">
+      <string>Режим игры</string>
+     </property>
+     <addaction name="randomMode"/>
+     <addaction name="noSafeZoneMode"/>
+     <addaction name="clusteredMode"/>
+    </widget>
     <addaction name="restartTrigger"/>
     <addaction name="separator"/>
     <addaction name="menu_3"/>
+    <addaction name="separator"/>
+    <addaction name="menu_4"/>
     <addaction name="separator"/>
     <addaction name="settingsTrigger"/>
     <addaction name="statisticsTrigger"/>
@@ -311,6 +321,21 @@
   <action name="statisticsTrigger">
    <property name="text">
     <string>Статистика</string>
+   </property>
+  </action>
+  <action name="randomMode">
+   <property name="text">
+    <string>Случайный</string>
+   </property>
+  </action>
+  <action name="noSafeZoneMode">
+   <property name="text">
+    <string>Без безопасной зоны</string>
+   </property>
+  </action>
+  <action name="clusteredMode">
+   <property name="text">
+    <string>Кластерный</string>
    </property>
   </action>
  </widget>

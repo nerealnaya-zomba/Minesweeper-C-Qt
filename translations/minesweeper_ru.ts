@@ -6,8 +6,8 @@
     <message>
         <location filename="../aboutprogram.ui" line="14"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_aboutprogram.h" line="53"/>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
+        <source>О программе</source>
+        <translation>О программе</translation>
     </message>
     <message>
         <location filename="../aboutprogram.ui" line="32"/>
@@ -36,7 +36,7 @@
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="194"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="196"/>
         <source>000</source>
-        <translation type="unfinished"></translation>
+        <translation>000</translation>
     </message>
     <message>
         <location filename="../gamewindow.ui" line="152"/>
@@ -129,48 +129,24 @@
         <translation>Кластерная</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation type="vanished">Игра</translation>
+        <location filename="../gamewindow.cpp" line="251"/>
+        <source>Победа!</source>
+        <translation>Победа!</translation>
     </message>
     <message>
-        <source>Difficulty</source>
-        <translation type="vanished">Сложность</translation>
+        <location filename="../gamewindow.cpp" line="251"/>
+        <source>Ты выиграл!</source>
+        <translation>Ты выиграл!</translation>
     </message>
     <message>
-        <source>Help</source>
-        <translation type="vanished">Помощь</translation>
+        <location filename="../gamewindow.cpp" line="253"/>
+        <source>Поражение!</source>
+        <translation>Поражение!</translation>
     </message>
     <message>
-        <source>Beginner</source>
-        <translation type="vanished">Новичок</translation>
-    </message>
-    <message>
-        <source>Intermediate</source>
-        <translation type="vanished">Любитель</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation type="vanished">Эксперт</translation>
-    </message>
-    <message>
-        <source>New Game</source>
-        <translation type="vanished">Новая игра</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="vanished">Настройки</translation>
-    </message>
-    <message>
-        <source>Statistics</source>
-        <translation type="vanished">Статистика</translation>
-    </message>
-    <message>
-        <source>How to Play</source>
-        <translation type="vanished">Как играть</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">О программе</translation>
+        <location filename="../gamewindow.cpp" line="253"/>
+        <source>Мины!</source>
+        <translation>Мины!</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="323"/>
@@ -182,81 +158,39 @@
     <name>HowToPlay</name>
     <message>
         <location filename="../howtoplay.ui" line="26"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="60"/>
-        <source>Form</source>
-        <translation>Form</translation>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="67"/>
+        <source>Как играть</source>
+        <translation>Как играть</translation>
     </message>
     <message>
         <location filename="../howtoplay.ui" line="44"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="61"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="68"/>
         <source>Открыть ячейку</source>
         <translation>Открыть ячейку</translation>
     </message>
     <message>
-        <location filename="../howtoplay.ui" line="56"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Segoe UI&apos;; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;левой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы открыть её.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;В первой открытой ячейке гарантированно не будет мины.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если в следующих открытых ячейках окажется мина, то игра завершится.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <location filename="../howtoplay.ui" line="62"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="69"/>
+        <source>Нажмите левой кнопкой мыши на закрытую ячейку, чтобы открыть её.
+В первой открытой ячейке гарантированно не будет мины.
+Если в следующих открытых ячейках окажется мина, то игра завершится.
+Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.</source>
+        <translation>Нажмите левой кнопкой мыши на закрытую ячейку, чтобы открыть её.
+В первой открытой ячейке гарантированно не будет мины.
+Если в следующих открытых ячейках окажется мина, то игра завершится.
+Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.</translation>
     </message>
     <message>
-        <location filename="../howtoplay.ui" line="86"/>
+        <location filename="../howtoplay.ui" line="106"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="75"/>
-        <source>Установить флажок</source>
-        <translation>Установить флажок</translation>
-    </message>
-    <message>
-        <location filename="../howtoplay.ui" line="98"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Segoe UI&apos;; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;правой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Число в ячейке показывает количество мин в соседних ячейках.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;1 означает только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="62"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Segoe UI&apos;; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;левой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы открыть её.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;В первой открытой ячейке гарантированно не будет мины.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если в следующих открытых яч��йках окажется мина, то игра завершится.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_howtoplay.h" line="76"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Segoe UI&apos;; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;правой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Число в ячейке показывает количество мин в соседних ячейках.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;1 означае�� только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>Нажмите правой кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.
+Число в ячейке показывает количество мин в соседних ячейках.
+1 означает только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.
+Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.</source>
+        <translation>Нажмите правой кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.
+Число в ячейке показывает количество мин в соседних ячейках.
+1 означает только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.
+Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.</translation>
     </message>
 </context>
 <context>
@@ -361,12 +295,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
 <context>
     <name>SettingsWindow</name>
     <message>
-        <location filename="../settingswindow.ui" line="20"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_settingswindow.h" line="207"/>
-        <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
-    </message>
-    <message>
         <location filename="../settingswindow.ui" line="47"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_settingswindow.h" line="208"/>
         <source>Язык</source>
@@ -436,6 +364,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <source>Отмена</source>
         <translation>Отмена</translation>
     </message>
+    <message>
+        <location filename="../settingswindow.ui" line="20"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_settingswindow.h" line="207"/>
+        <source>Настройки</source>
+        <translation>Настройки</translation>
+    </message>
 </context>
 <context>
     <name>StatisticsWindow</name>
@@ -461,7 +395,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="224"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="228"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="../statisticswindow.ui" line="101"/>
@@ -481,7 +415,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="226"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="230"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../statisticswindow.ui" line="230"/>
@@ -502,37 +436,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>Лучшее время:</translation>
     </message>
     <message>
-        <location filename="../statisticswindow.ui" line="26"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="217"/>
-        <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
-    </message>
-    <message>
         <location filename="../statisticswindow.ui" line="314"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="231"/>
+        <location filename="../statisticswindow.cpp" line="48"/>
         <source>Сбросить статистику</source>
         <translation>Сбросить статистику</translation>
     </message>
     <message>
-        <location filename="../statisticswindow.cpp" line="12"/>
-        <source>Statistics</source>
+        <location filename="../statisticswindow.ui" line="26"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_statisticswindow.h" line="217"/>
+        <source>Статистика</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="../statisticswindow.cpp" line="32"/>
-        <location filename="../statisticswindow.cpp" line="39"/>
-        <source>%1 sec</source>
+        <location filename="../statisticswindow.cpp" line="31"/>
+        <location filename="../statisticswindow.cpp" line="38"/>
+        <source>%1 сек</source>
         <translation>%1 сек</translation>
     </message>
     <message>
         <location filename="../statisticswindow.cpp" line="49"/>
-        <source>Reset statistics</source>
-        <translation>Сброс статистики</translation>
-    </message>
-    <message>
-        <location filename="../statisticswindow.cpp" line="50"/>
-        <source>Are you sure you want to reset all your statistics?</source>
-        <translation>Вы уверены, что хотите сбросить всю вашу статистику?</translation>
+        <source>Вы уверены, что хотите сбросить всю статистику?</source>
+        <translation>Вы уверены, что хотите сбросить всю статистику?</translation>
     </message>
 </context>
 </TS>

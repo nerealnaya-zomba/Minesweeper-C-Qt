@@ -3,7 +3,6 @@ C:/QtProjects/MinesweeperProject/build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u
   C:/Qt1/6.9.2/mingw_64/include/QtCore/QPointer \
   C:/Qt1/6.9.2/mingw_64/include/QtCore/QSettings \
   C:/Qt1/6.9.2/mingw_64/include/QtCore/QString \
-  C:/Qt1/6.9.2/mingw_64/include/QtCore/QStringList \
   C:/Qt1/6.9.2/mingw_64/include/QtCore/QTime \
   C:/Qt1/6.9.2/mingw_64/include/QtCore/QTimer \
   C:/Qt1/6.9.2/mingw_64/include/QtCore/q17memory.h \
@@ -398,8 +397,8 @@ C:/QtProjects/MinesweeperProject/build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u
   C:/QtProjects/MinesweeperProject/gamefield.hpp \
   C:/QtProjects/MinesweeperProject/gamestate.hpp \
   C:/QtProjects/MinesweeperProject/gametimer.hpp \
-  C:/QtProjects/MinesweeperProject/mineplacementfactory.hpp \
   C:/QtProjects/MinesweeperProject/mineplacementstrategy.hpp \
   C:/QtProjects/MinesweeperProject/point.hpp \
   C:/QtProjects/MinesweeperProject/settings.hpp \
-  C:/QtProjects/MinesweeperProject/statistics.hpp
+  C:/QtProjects/MinesweeperProject/statistics.hpp \
+  C:/QtProjects/MinesweeperProject/strategy.hpp

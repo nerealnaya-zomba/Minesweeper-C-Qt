@@ -3,7 +3,6 @@ MinesweeperProject_autogen/timestamp: \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QPointer \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QSettings \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QString \
-	C:/Qt1/6.9.2/mingw_64/include/QtCore/QStringList \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QTime \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QTimer \
 	C:/Qt1/6.9.2/mingw_64/include/QtCore/QTranslator \
@@ -666,6 +665,8 @@ MinesweeperProject_autogen/timestamp: \
 	C:/QtProjects/MinesweeperProject/statistics.hpp \
 	C:/QtProjects/MinesweeperProject/statisticswindow.cpp \
 	C:/QtProjects/MinesweeperProject/statisticswindow.hpp \
+	C:/QtProjects/MinesweeperProject/strategy.cpp \
+	C:/QtProjects/MinesweeperProject/strategy.hpp \
 	C:/QtProjects/MinesweeperProject/themestyles.cpp \
 	C:/QtProjects/MinesweeperProject/themestyles.hpp \
 	C:/QtProjects/MinesweeperProject/windowswitcher.hpp \

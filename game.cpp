@@ -1,13 +1,15 @@
 #include "game.hpp"
 
-Game::Game(const Difficulty& difficulty, const Settings& settings,
-           std::shared_ptr<Statistics> externalStatistics,
-           const QString& strategyName)
+Game::Game(const Difficulty& difficulty,
+           const Strategy& strategy,
+           const Settings& settings,
+           std::shared_ptr<Statistics> externalStatistics)
 
     : currentDifficulty(difficulty),
       currentSettings(settings),
-      minePlacer(MinePlacementFactory::createStrategy(strategyName)),
-      field(difficulty, nullptr),
+      currentStrategy(strategy),
+      minePlacer(strategy.createPlacementStrategy()),
+      field(difficulty, minePlacer),
       timer(),
       gameStatistics(externalStatistics),
       gameState(GameState::Waiting),
@@ -117,6 +119,49 @@ void Game::flagToggle(Point flagPoint) {
     }
 }
 
+void Game::chordClick(Point clickPoint) {
+
+    if (gameState != GameState::Running) {
+        return;
+    }
+
+    const Cell* cell = field.getCell(clickPoint.getX(), clickPoint.getY());
+    if (!cell || !cell->getIsRevealed() || cell->getIsFlagged()) {
+        return;
+    }
+
+    auto neighbours = field.getNeighbours(clickPoint);
+    int flaggedCount = 0;
+
+    // Считаем кол-во флагов вокруг //
+    for (Cell* neighbour : neighbours) {
+        if (neighbour && neighbour->getIsFlagged()) {
+            flaggedCount++;
+        }
+    }
+
+    if (flaggedCount == cell->getAdjacentMines()) {
+        // Открываем все неоткрытые и не помеченые флагом клетки //
+        for (Cell* neighbour : neighbours) {
+            if (neighbour && !neighbour->getIsRevealed() && !neighbour->getIsFlagged()) {
+
+                Point neighbourPoint(neighbour->getX(), neighbour->getY());
+                bool revealSuccessful = field.revealCell(neighbourPoint);
+
+                if (!revealSuccessful && neighbour->getIsMine()) {
+                    endGame(false);
+                    return;
+                }
+            }
+        }
+    }
+
+    if (field.checkWin()) {
+        endGame(true);
+    }
+
+}
+
 // Геттеры //
 GameField& Game::getGameField() {
     return field;
@@ -134,6 +179,10 @@ const Difficulty& Game::getCurrentDifficulty() {
     return currentDifficulty;
 }
 
+const Strategy& Game::getCurrentStrategy() {
+    return currentStrategy;
+}
+
 const Settings& Game::getCurrentSettings() {
     return currentSettings;
 }
@@ -148,18 +197,12 @@ void Game::setCurrentDifficulty(const Difficulty& newDifficulty) {
     restartGame();
 }
 
+void Game::setCurrentStrategy(const Strategy& newStrategy) {
+    this->currentStrategy = newStrategy;
+    minePlacer = newStrategy.createPlacementStrategy();
+    restartGame();
+}
+
 void Game::setCurrentSettings(const Settings& newSettings) {
     this->currentSettings = newSettings;
-}
-
-// Установка стратегии по имени //
-void Game::setMinePlacementStrategy(const QString& strategyName)
-{
-    minePlacer = MinePlacementFactory::createStrategy(strategyName);
-}
-
-// Установка готовой стратегии //
-void Game::setMinePlacementStrategy(std::unique_ptr<MinePlacementStrategy> strategy)
-{
-    minePlacer = std::move(strategy);
 }

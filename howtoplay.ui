@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Как играть</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -43,7 +43,7 @@
    <property name="title">
     <string>Открыть ячейку</string>
    </property>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -52,18 +52,20 @@
       <height>221</height>
      </rect>
     </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;левой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы открыть её.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;В первой открытой ячейке гарантированно не будет мины.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если в следующих открытых ячейках окажется мина, то игра завершится.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Нажмите левой кнопкой мыши на закрытую ячейку, чтобы открыть её.
+В первой открытой ячейке гарантированно не будет мины.
+Если в следующих открытых ячейках окажется мина, то игра завершится.
+Если же в ячейке нет мины, то она откроется пустой, либо будет содержать число от 1 до 8.</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -85,7 +87,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="title">
     <string>Установить флажок</string>
    </property>
-   <widget class="QTextBrowser" name="textBrowser_3">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -94,18 +96,20 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>221</height>
      </rect>
     </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:12pt; font-weight:700; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Нажмите &lt;/span&gt;правой&lt;span style=&quot; font-weight:400;&quot;&gt; кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Число в ячейке показывает количество мин в соседних ячейках.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;1 означает только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Нажмите правой кнопкой мыши на закрытую ячейку, чтобы поместить на неё флажок.
+Число в ячейке показывает количество мин в соседних ячейках.
+1 означает только одну мину в соседних ячейках, а 8, что все соседние ячейки заняты минами.
+Отмечайте флажком ячейки, в которых, на Ваш взгляд, есть мины.</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

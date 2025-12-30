@@ -48,6 +48,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
         attemptsplacementstrategy.hpp attemptsplacementstrategy.cpp
         mineplacementfactory.hpp mineplacementfactory.cpp
         windowswitcher.hpp
+        strategy.hpp strategy.cpp
 
 
     )

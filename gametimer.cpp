@@ -10,28 +10,22 @@ GameTimer::GameTimer() : elapsedSeconds(0), isRunning(false)
 void GameTimer::start() {
 
     if (!isRunning) {
-
         isRunning = true;
-        timer.start(TIMER_INTERVAL_MS); // запускаем таймер на 1 секунду
-
+        timer.start(TIMER_INTERVAL_MS); // Запускаем таймер на 1 секунду
     }
 }
 
 void GameTimer::stop() {
 
     if (isRunning) {
-
         isRunning = false;
         timer.stop();
-
     }
 }
 
 void GameTimer::restart() {
-
     stop();
     elapsedSeconds = 0;
-
 }
 
 int GameTimer::getElapsedSeconds() const {

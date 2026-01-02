@@ -29,7 +29,8 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>png-transparent-minesweeper-free-mine-sweeper-mono-android-game-android-game-cat-like-mammal-carnivo.ico</normaloff>png-transparent-minesweeper-free-mine-sweeper-mono-android-game-android-game-cat-like-mammal-carnivo.ico</iconset>
+    <selectedon>:/mine.ico</selectedon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -254,6 +255,8 @@
      <addaction name="beginnerDifficulty"/>
      <addaction name="intermediateDifficulty"/>
      <addaction name="expertDifficulty"/>
+     <addaction name="separator"/>
+     <addaction name="customDifficulty"/>
     </widget>
     <widget class="QMenu" name="menu_4">
      <property name="title">
@@ -336,6 +339,11 @@
   <action name="clusteredMode">
    <property name="text">
     <string>Кластерный</string>
+   </property>
+  </action>
+  <action name="customDifficulty">
+   <property name="text">
+    <string>Пользовательская</string>
    </property>
   </action>
  </widget>

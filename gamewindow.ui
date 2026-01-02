@@ -86,12 +86,18 @@
         <widget class="QPushButton" name="restartButton">
          <property name="minimumSize">
           <size>
-           <width>64</width>
-           <height>64</height>
+           <width>70</width>
+           <height>70</height>
           </size>
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>64</width>
+           <height>64</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -158,6 +164,8 @@
      <addaction name="beginnerDifficulty"/>
      <addaction name="intermediateDifficulty"/>
      <addaction name="expertDifficulty"/>
+     <addaction name="separator"/>
+     <addaction name="customDifficulty"/>
     </widget>
     <widget class="QMenu" name="gameModeMenu">
      <property name="title">
@@ -241,6 +249,11 @@
   <action name="clusteredMode">
    <property name="text">
     <string>Кластерная</string>
+   </property>
+  </action>
+  <action name="customDifficulty">
+   <property name="text">
+    <string>Пользовательская</string>
    </property>
   </action>
  </widget>

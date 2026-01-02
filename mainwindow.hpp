@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
 
 public:
 
-    static QTranslator* appTranslator;
+    static std::unique_ptr<QTranslator> appTranslator;
 
 private:
 
@@ -33,7 +33,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void setupUI();
     void setupConnections();
 
     void applySettings();

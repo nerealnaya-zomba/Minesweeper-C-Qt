@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Release-a8b557bc8a42be425ec4.json",
+					"jsonFile" : "directory-.-Release-d5505e27d3a547c2b840.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MinesweeperProject::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MinesweeperProject-Release-ae4d90b1eae76d461e8f.json",
+					"jsonFile" : "target-MinesweeperProject-Release-c559125b8f1b2e30c1c7.json",
 					"name" : "MinesweeperProject",
 					"projectIndex" : 0
 				},

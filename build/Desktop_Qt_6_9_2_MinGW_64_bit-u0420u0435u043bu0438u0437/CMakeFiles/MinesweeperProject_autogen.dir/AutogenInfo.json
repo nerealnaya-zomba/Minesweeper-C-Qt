@@ -492,6 +492,12 @@
 			null
 		],
 		[
+			"C:/QtProjects/MinesweeperProject/customdifficultywindow.hpp",
+			"MU",
+			"EWIEGA46WW/moc_customdifficultywindow.cpp",
+			null
+		],
+		[
 			"C:/QtProjects/MinesweeperProject/difficulty.hpp",
 			"MU",
 			"EWIEGA46WW/moc_difficulty.cpp",
@@ -694,6 +700,11 @@
 		],
 		[ "C:/QtProjects/MinesweeperProject/cell.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/clusteredplacement.cpp", "MU", null ],
+		[
+			"C:/QtProjects/MinesweeperProject/customdifficultywindow.cpp",
+			"MU",
+			null
+		],
 		[ "C:/QtProjects/MinesweeperProject/difficulty.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/game.cpp", "MU", null ],
 		[ "C:/QtProjects/MinesweeperProject/gamefield.cpp", "MU", null ],

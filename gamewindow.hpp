@@ -20,6 +20,8 @@ public:
     static constexpr int DEFAULT_CELL_SIZE = 30; // Размер клетки
     static constexpr int CELL_SPACING = 1; // Отступ м/д клетками
 
+    static constexpr int MIN_FIELD_WIDTH_FOR_ALIGNMENT = 280; // Значение для центрирования поля
+
     static const QMap<int , QString> NUMBER_COLORS; // Контейнер для хранения цветов цифр
 
 private:

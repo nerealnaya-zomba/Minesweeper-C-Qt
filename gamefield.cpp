@@ -7,7 +7,7 @@ GameField::GameField(const Difficulty& difficulty, std::shared_ptr<MinePlacement
       flagsPlaced(0),
       width(difficulty.getWidth()),
       height(difficulty.getHeight()),
-      minePlacer(nullptr)
+      minePlacer(minePlacerPtr)
 {
 
     grid.resize(height); // Создаём 'height' строк

@@ -36,8 +36,6 @@ void ClusteredPlacement::placeMines(GameField& field, int mines, const Point& sa
         Point clusterCenter = getRandomPosition(width, height);
         attempts++;
 
-        bool validPosition = true;
-
         // Проверки можно ли разместить кластер //
         if (inSafeZone(clusterCenter, safePoint, safeRadius)) {
             continue;
@@ -52,10 +50,9 @@ void ClusteredPlacement::placeMines(GameField& field, int mines, const Point& sa
             continue;
         }
 
-        if (validPosition) {
-            placeSingleCluster(field, clusterCenter, placedMines, clusterSize, safePoint, safeRadius);
-            clusterCenters.push_back(clusterCenter);
-        }
+        placeSingleCluster(field, clusterCenter, placedMines, clusterSize, safePoint, safeRadius);
+        clusterCenters.push_back(clusterCenter);
+
     }
 
     // Если после кластеров остались мины, расставляем их случайно //

@@ -631,6 +631,8 @@ MinesweeperProject_autogen/timestamp: \
 	C:/QtProjects/MinesweeperProject/cell.hpp \
 	C:/QtProjects/MinesweeperProject/clusteredplacement.cpp \
 	C:/QtProjects/MinesweeperProject/clusteredplacement.hpp \
+	C:/QtProjects/MinesweeperProject/customdifficultywindow.cpp \
+	C:/QtProjects/MinesweeperProject/customdifficultywindow.hpp \
 	C:/QtProjects/MinesweeperProject/difficulty.cpp \
 	C:/QtProjects/MinesweeperProject/difficulty.hpp \
 	C:/QtProjects/MinesweeperProject/game.cpp \
@@ -671,6 +673,7 @@ MinesweeperProject_autogen/timestamp: \
 	C:/QtProjects/MinesweeperProject/themestyles.hpp \
 	C:/QtProjects/MinesweeperProject/windowswitcher.hpp \
 	C:/QtProjects/MinesweeperProject/aboutprogram.ui \
+	C:/QtProjects/MinesweeperProject/customdifficultywindow.ui \
 	C:/QtProjects/MinesweeperProject/gamewindow.ui \
 	C:/QtProjects/MinesweeperProject/howtoplay.ui \
 	C:/QtProjects/MinesweeperProject/mainwindow.ui \

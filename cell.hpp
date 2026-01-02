@@ -16,6 +16,9 @@ public:
     Cell();
 
     void reset();
+    bool isEmpty() const;
+
+    void setCoordinates(int newX, int newY);
 
     bool getIsMine() const;
     void setMine(bool);
@@ -31,8 +34,5 @@ public:
 
     int getX() const;
     int getY() const;
-
-    bool isEmpty() const;
-    void setCoordinates(int newX, int newY);
 
 };

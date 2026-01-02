@@ -19,6 +19,7 @@ Difficulty::Difficulty(const QString& name, int width, int height, int mines)
 
 }
 
+// Геттеры //
 const QString& Difficulty::getName() const {
     return name;
 }
@@ -35,6 +36,7 @@ int Difficulty::getMines() const {
     return mines;
 }
 
+// Статические методы для доступа к сложностям //
 Difficulty Difficulty::beginner() {
     return Difficulty("Beginner", 9, 9, 10);
 }
@@ -45,4 +47,8 @@ Difficulty Difficulty::intermediate() {
 
 Difficulty Difficulty::expert() {
     return Difficulty("Expert", 30, 16, 99);
+}
+
+Difficulty Difficulty::custom(int width, int height, int mines) {
+    return Difficulty("Custom", width, height, mines);
 }

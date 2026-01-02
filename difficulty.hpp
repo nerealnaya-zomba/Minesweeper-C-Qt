@@ -25,6 +25,6 @@ public:
     static Difficulty intermediate();
     static Difficulty expert();
 
-    static Difficulty custom();
+    static Difficulty custom(int width, int height, int mines);
 
 };

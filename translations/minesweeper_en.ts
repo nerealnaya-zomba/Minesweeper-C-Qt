@@ -23,134 +23,216 @@
     </message>
 </context>
 <context>
+    <name>CustomDifficultyWindow</name>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="26"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="202"/>
+        <source>Пользовательская сложность</source>
+        <translation>Custom</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="84"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="203"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="108"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="204"/>
+        <source>Отмена</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="169"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="205"/>
+        <source>Ширина</source>
+        <translation>Width</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="228"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="206"/>
+        <source>Высота</source>
+        <translation>Height</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.ui" line="287"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="207"/>
+        <source>Мины</source>
+        <translation>Mines</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="24"/>
+        <source>Некорректные параметры:
+</source>
+        <translation>Incorrect parameters:</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="31"/>
+        <source>- Минимальный размер поля 5x5
+</source>
+        <translation>- Minimum field size is 5x5</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="34"/>
+        <source>- Количество мин должно быть меньше количества клеток
+</source>
+        <translation>- The number of mines should be less than the number of cells</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="37"/>
+        <source>- Слишком много мин (максимум 25% от общего числа клеток)
+</source>
+        <translation>- Too many mines (maximum 25% of the total number of cells)</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="40"/>
+        <source>Некорректные данные</source>
+        <translation>Incorrect data</translation>
+    </message>
+</context>
+<context>
     <name>GameWindow</name>
     <message>
         <location filename="../gamewindow.ui" line="20"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="182"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="188"/>
         <source>MainWindow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gamewindow.ui" line="68"/>
-        <location filename="../gamewindow.ui" line="119"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="194"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="196"/>
+        <location filename="../gamewindow.ui" line="125"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="201"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="203"/>
         <source>000</source>
         <translation>000</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="152"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="197"/>
+        <location filename="../gamewindow.ui" line="158"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="204"/>
         <source>Игра</source>
         <translation>Game</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="156"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="198"/>
+        <location filename="../gamewindow.ui" line="162"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="205"/>
         <source>Сложность</source>
         <translation>Difficulty</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="164"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="199"/>
+        <location filename="../gamewindow.ui" line="172"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="206"/>
         <source>Режим игры</source>
         <translation>Game mode</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="181"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="200"/>
+        <location filename="../gamewindow.ui" line="189"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="207"/>
         <source>Помощь</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="193"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="183"/>
+        <location filename="../gamewindow.ui" line="201"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="189"/>
         <source>Новая игра</source>
         <translation>New game</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="198"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="184"/>
+        <location filename="../gamewindow.ui" line="206"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="190"/>
         <source>Новичок</source>
         <translation>Beginner</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="203"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="185"/>
+        <location filename="../gamewindow.ui" line="211"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="191"/>
         <source>Любитель</source>
         <translation>Intermediate</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="208"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="186"/>
+        <location filename="../gamewindow.ui" line="216"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="192"/>
         <source>Эксперт</source>
         <translation>Expert</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="213"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="187"/>
+        <location filename="../gamewindow.ui" line="221"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="193"/>
         <source>Настройки</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="218"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="188"/>
+        <location filename="../gamewindow.ui" line="226"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="194"/>
         <source>Как играть</source>
         <translation>How to play</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="223"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="189"/>
+        <location filename="../gamewindow.ui" line="231"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="195"/>
         <source>О программе</source>
         <translation>About program</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="228"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="190"/>
+        <location filename="../gamewindow.ui" line="236"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="196"/>
         <source>Статистика</source>
         <translation>Statistics</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="233"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="191"/>
+        <location filename="../gamewindow.ui" line="241"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="197"/>
         <source>Случайный</source>
         <translation>Random</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="238"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="192"/>
+        <location filename="../gamewindow.ui" line="246"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="198"/>
         <source>Без безопасной зоны</source>
         <translation>No safe zone</translation>
     </message>
     <message>
-        <location filename="../gamewindow.ui" line="243"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="193"/>
+        <location filename="../gamewindow.ui" line="251"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="199"/>
         <source>Кластерная</source>
         <translation>Clustered</translation>
     </message>
     <message>
-        <location filename="../gamewindow.cpp" line="251"/>
-        <source>Победа!</source>
-        <translation>Win!</translation>
+        <location filename="../gamewindow.ui" line="256"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_gamewindow.h" line="200"/>
+        <source>Пользовательская</source>
+        <translation>Custom</translation>
     </message>
     <message>
-        <location filename="../gamewindow.cpp" line="251"/>
+        <location filename="../gamewindow.cpp" line="267"/>
+        <location filename="../gamewindow.cpp" line="550"/>
+        <source>Победа</source>
+        <translation>Win</translation>
+    </message>
+    <message>
+        <location filename="../gamewindow.cpp" line="267"/>
+        <location filename="../gamewindow.cpp" line="550"/>
         <source>Ты выиграл!</source>
         <translation>You won!</translation>
     </message>
     <message>
-        <location filename="../gamewindow.cpp" line="253"/>
-        <source>Поражение!</source>
-        <translation>Defeat!</translation>
+        <location filename="../gamewindow.cpp" line="269"/>
+        <location filename="../gamewindow.cpp" line="552"/>
+        <source>Поражение</source>
+        <translation>Defeat</translation>
     </message>
     <message>
-        <location filename="../gamewindow.cpp" line="253"/>
+        <location filename="../gamewindow.cpp" line="269"/>
+        <location filename="../gamewindow.cpp" line="552"/>
         <source>Мины!</source>
         <translation>Mines!</translation>
     </message>
     <message>
-        <location filename="../gamewindow.cpp" line="323"/>
+        <location filename="../gamewindow.cpp" line="335"/>
         <source>Стратегия изменена: %1</source>
+        <translation>Strategy is changed: %1</translation>
+    </message>
+    <message>
+        <source>Minesweeper</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -203,99 +285,129 @@ Mark cells with a flag where you think there are mines.</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="28"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="210"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="232"/>
         <source>MineSweeper</source>
         <translation>MineSweeper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="68"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="219"/>
+        <location filename="../mainwindow.ui" line="69"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="245"/>
         <source>Начать игру</source>
         <translation>Start game</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="87"/>
-        <location filename="../mainwindow.ui" line="283"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="212"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="220"/>
+        <location filename="../mainwindow.ui" line="88"/>
+        <location filename="../mainwindow.ui" line="296"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="234"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="246"/>
         <source>Настройки</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="103"/>
-        <location filename="../mainwindow.ui" line="313"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="218"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="221"/>
+        <location filename="../mainwindow.ui" line="104"/>
+        <location filename="../mainwindow.ui" line="326"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="240"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="247"/>
         <source>Статистика</source>
         <translation>Statistics</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="122"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="222"/>
+        <location filename="../mainwindow.ui" line="123"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="248"/>
         <source>Выход</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="193"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="223"/>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.ui" line="194"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="249"/>
+        <location filename="../mainwindow.cpp" line="154"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>Сапёр</source>
         <translation>MineSweeper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="248"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="224"/>
+        <location filename="../mainwindow.ui" line="249"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="250"/>
         <source>Игра</source>
         <translation>Game</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="252"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="225"/>
+        <location filename="../mainwindow.ui" line="253"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="251"/>
         <source>Сложность</source>
         <translation>Difficulty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="267"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="226"/>
+        <location filename="../mainwindow.ui" line="263"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="252"/>
+        <source>Режим игры</source>
+        <translation>Game mode</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="253"/>
         <source>Помощь</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="278"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="211"/>
+        <location filename="../mainwindow.ui" line="291"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="233"/>
         <source>Новая игра</source>
         <translation>New game</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="288"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="213"/>
+        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="235"/>
         <source>Новичок</source>
         <translation>Beginner</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="293"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="214"/>
+        <location filename="../mainwindow.ui" line="306"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="236"/>
         <source>Как играть</source>
         <translation>How to play</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="298"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="215"/>
+        <location filename="../mainwindow.ui" line="311"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="237"/>
         <source>О программе</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="303"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="216"/>
+        <location filename="../mainwindow.ui" line="316"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="238"/>
         <source>Любитель</source>
         <translation>Intermediate</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="308"/>
-        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="217"/>
+        <location filename="../mainwindow.ui" line="321"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="239"/>
         <source>Профи</source>
         <translation>Expert</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="331"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="241"/>
+        <source>Случайный</source>
+        <translation>Random</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="242"/>
+        <source>Без безопасной зоны</source>
+        <translation>No safe zone</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="243"/>
+        <source>Кластерный</source>
+        <translation>Clustered</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="346"/>
+        <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_mainwindow.h" line="244"/>
+        <source>Пользовательская</source>
+        <translation>Custom</translation>
     </message>
 </context>
 <context>

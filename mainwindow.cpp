@@ -6,6 +6,7 @@
 #include <QDebug>
 
 #include "aboutprogram.hpp"
+#include "customdifficultywindow.hpp"
 #include "gamewindow.hpp"
 #include "howtoplay.hpp"
 #include "settingswindow.hpp"
@@ -13,7 +14,7 @@
 #include "themestyles.hpp"
 #include "windowswitcher.hpp"
 
-QTranslator* MainWindow::appTranslator = nullptr;
+std::unique_ptr<QTranslator> MainWindow::appTranslator = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
 
@@ -27,15 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     applySettings();
-    setupUI();
     setupConnections();
 }
 
 MainWindow::~MainWindow() = default;
-
-void MainWindow::setupUI() {
-    setWindowIcon(QIcon(":/mine.ico"));
-}
 
 void MainWindow::setupConnections() {
 
@@ -58,6 +54,17 @@ void MainWindow::setupConnections() {
     connect(ui->expertDifficulty, &QAction::triggered, this, [this]() {
         currentDifficulty = Difficulty::expert();
         on_startGameButton_clicked();
+    });
+
+    connect(ui->customDifficulty, &QAction::triggered, this, [this] () {
+
+        CustomDifficultyWindow dialog(this);
+        connect(&dialog, &CustomDifficultyWindow::settingsAccepted, this, [this](int width, int height, int mines) {
+            currentDifficulty = Difficulty::custom(width, height, mines);
+            on_startGameButton_clicked();
+        });
+        dialog.exec();
+
     });
 
     connect(ui->randomMode, &QAction::triggered, this, [this]() {
@@ -97,27 +104,21 @@ void MainWindow::applySettings() {
 
     QString lang = currentSettings->getLanguage();
 
-    // Удаляем старый глобальный переводчик //
-    if (MainWindow::appTranslator) {
-        QCoreApplication::removeTranslator(MainWindow::appTranslator);
-        delete MainWindow::appTranslator;
-        MainWindow::appTranslator = nullptr;
-    }
+    MainWindow::appTranslator.reset(); // Удаляем старый глобальный переводчик
 
     // Создаем и устанавливаем новый глобальный переводчик //
-    MainWindow::appTranslator = new QTranslator();
+    MainWindow::appTranslator = std::make_unique<QTranslator>();
     QString qmFile = QString(":/translations/minesweeper_%1").arg(lang);
 
     if (MainWindow::appTranslator->load(qmFile)) {
-        QCoreApplication::installTranslator(MainWindow::appTranslator);
+        QCoreApplication::installTranslator(MainWindow::appTranslator.get());
     } else { // Альтернативный путь
         qmFile = QString(":/translations/minesweeper_%1.qm").arg(lang);
         if (MainWindow::appTranslator->load(qmFile)) {
-            QCoreApplication::installTranslator(MainWindow::appTranslator);
+            QCoreApplication::installTranslator(MainWindow::appTranslator.get());
         } else {
             qDebug() << "Не удалось загрузить перевод для языка:" << lang;
-            delete MainWindow::appTranslator;
-            MainWindow::appTranslator = nullptr;
+            MainWindow::appTranslator.reset();
         }
     }
 

@@ -23,23 +23,20 @@ Game::~Game() {}
 
 void Game::startGame(const Point& safeStartPoint) {
 
-    this->gameState = GameState::Running;
     this->safeStartPoint = safeStartPoint;
 
     int numMinesToPlace = currentDifficulty.getMines();
-
     minePlacer->placeMines(field, numMinesToPlace, safeStartPoint);
-
     field.countAdjacentMines();
 
+    // Если мина попала в первую ячейку //
     if (field.getCell(safeStartPoint.getX(), safeStartPoint.getY())->getIsMine())
     {
-        // Если мина попала в первую ячейку (это возможно только при NoSafePlacement)
-        endGame(false); // Игра проиграна
-        // endGame остановит таймер и установит gameState=Lost
-        return; // Прерываем запуск игры
+        endGame(false);
+        return;
     }
 
+    this->gameState = GameState::Running;
     field.revealCell(safeStartPoint);
 
     timer.restart();
@@ -110,13 +107,8 @@ void Game::flagToggle(Point flagPoint) {
     if (gameState != GameState::Running && gameState != GameState::Waiting) {
         return;
     }
-
     field.toggleFlag(flagPoint);
 
-    if (field.checkWin() && gameState == GameState::Running) {
-        endGame(true);
-        return;
-    }
 }
 
 void Game::chordClick(Point clickPoint) {

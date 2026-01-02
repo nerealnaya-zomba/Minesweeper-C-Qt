@@ -49,6 +49,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
         mineplacementfactory.hpp mineplacementfactory.cpp
         windowswitcher.hpp
         strategy.hpp strategy.cpp
+        customdifficultywindow.hpp customdifficultywindow.cpp customdifficultywindow.ui
 
 
     )

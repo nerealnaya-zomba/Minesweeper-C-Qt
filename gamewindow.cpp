@@ -6,6 +6,7 @@
 #include <QScreen>
 
 #include "aboutprogram.hpp"
+#include "customdifficultywindow.hpp"
 #include "howtoplay.hpp"
 #include "settingswindow.hpp"
 #include "statisticswindow.hpp"
@@ -68,6 +69,14 @@ void GameWindow::setupConnections() {
         changeDifficulty(Difficulty::expert());
     });
 
+    connect(ui->customDifficulty, &QAction::triggered, this, [this]() {
+        CustomDifficultyWindow dialog(this);
+        connect(&dialog, &CustomDifficultyWindow::settingsAccepted, this, [this](int width, int height, int mines) {
+            changeDifficulty(Difficulty::custom(width, height, mines));
+        });
+        dialog.exec();
+    });
+
     // Соединяем смену расстановки мин //
     connect(ui->randomMode, &QAction::triggered, this, [this]() {
         setMinePlacementStrategy("random");
@@ -99,11 +108,7 @@ void GameWindow::setupConnections() {
 // Установка интерфейса //
 void GameWindow::setupUI(const Difficulty& currentDifficulty) {
 
-    // Устанавливаем смайлик на кнопку рестарта //
-    updateSmileIcon();
-    ui->restartButton->setIconSize(QSize(64, 64));
-    ui->restartButton->setText("");
-    ui->restartButton->setFixedSize(70, 70);
+    updateSmileIcon(); // Устанавливаем смайлик на кнопку рестарта
 
     // Устаналиваем кол-во мин на поле и сбрасываем таймер //
     int mines = currentDifficulty.getMines();
@@ -203,7 +208,8 @@ void GameWindow::createGameField() {
 
     ui->gameArea->setLayout(grid); // Размещаем поле в окне
 
-    if (width * cellSize < 280) {  // Если поле маленькое
+    // Если поле маленькое центрируем его //
+    if (width * cellSize < MIN_FIELD_WIDTH_FOR_ALIGNMENT) {
         QVBoxLayout* mainLayout = qobject_cast<QVBoxLayout*>(ui->centralwidget->layout());
         if (mainLayout) {
             mainLayout->setAlignment(ui->gameArea, Qt::AlignHCenter);
@@ -236,81 +242,12 @@ int GameWindow::calculateOptimalCellSize(int width, int height) const {
     return cellSize;
 }
 
-/* // Нажатие левой кнопкой мыши //
-void GameWindow::onLeftClick(int x, int y) {
-
-    if (!game) return;
-
-    Qt::MouseButtons currentButtons = QApplication::mouseButtons();
-
-    if (currentButtons == (Qt::LeftButton | Qt::RightButton)) {
-        onChordClick(x, y);
-        return;
-    }
-
-    qDebug() << "Левый клик:" << x << y;
-
-    if (game->getGameState() == GameState::Waiting) {
-        game->startGame(Point(x, y));
-    } else if (game->getGameState() == GameState::Running){
-        game->cellClick(Point(x, y));
-    }
-
-    updateField();
-
-    if (game->getGameState() == GameState::Won) {
-        QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
-    } else if (game->getGameState() == GameState::Lost) {
-        QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
-        game->getGameField().revealAllMines();
-        updateField();
-    }
-
-}
-
-// Нажатие правой кнопкой мыши //
-void GameWindow::onRightClick(int x, int y) {
-
-    if (!game) return;
-
-    qDebug() << "Правый клик:" << x << y;
-    game->flagToggle(Point(x, y));
-    updateCell(x, y);
-    updateMinesCounter();
-
-}
-
-void GameWindow::onChordClick(int x, int y) {
-
-    if (!game) return;
-
-    qDebug() << "Аккорд (левая+правая):" << x << y;
-
-    if (game->getGameState() == GameState::Running) {
-
-        game->chordClick(Point(x, y));
-        updateField();
-
-        if (game->getGameState() == GameState::Won) {
-            QMessageBox::information(this, tr("Победа!"), tr("Ты выиграл!"));
-        } else if (game->getGameState() == GameState::Lost) {
-            QMessageBox::information(this, tr("Поражение!"), tr("Мины!"));
-            game->getGameField().revealAllMines();
-            updateField();
-        }
-    }
-
-}
-*/
-
 void GameWindow::handleMouseClick(int x, int y, Qt::MouseButton button) {
 
     if (!game) return;
 
     const Cell* cell = game->getGameField().getCell(x, y);
     if (!cell) return;
-
-    qDebug() << "handleMouseClick:" << x << y << "button:" << button;
 
     // Левый клик //
     if (!cell->getIsRevealed()) {
@@ -340,8 +277,6 @@ void GameWindow::handleMouseClick(int x, int y, Qt::MouseButton button) {
             updateCell(x, y);
             updateMinesCounter();
         }
-    } else {
-        qDebug() << "Клетка уже открыта - обычный клик игнорируется";
     }
 
 }
@@ -444,6 +379,7 @@ void GameWindow::updateWindowTitle() {
         if (diffName == "Beginner") diffName = "Новичок";
         else if (diffName == "Intermediate") diffName = "Любитель";
         else if (diffName == "Expert") diffName = "Эксперт";
+        else if (diffName == "Custom") diffName = "Пользовательский";
         setWindowTitle("Сапёр - " + diffName);
     } else {
         setWindowTitle("Minesweeper - " + diffName);
@@ -589,11 +525,6 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
 
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 
-        qDebug() << "=== eventFilter: MouseButtonPress ===";
-        qDebug() << "Клетка:" << clickX << clickY;
-        qDebug() << "Кнопка мыши:" << mouseEvent->button();
-        qDebug() << "Все нажатые кнопки:" << mouseEvent->buttons();
-
         // Левая кнопка //
         if (mouseEvent->button() == Qt::LeftButton) {
             leftButtonPressed = true;
@@ -608,11 +539,10 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
 
         // Аккорд //
         if (leftButtonPressed && rightButtonPressed) {
-            qDebug() << "АККОРД обнаружен через eventFilter!";
 
             const Cell* cell = game->getGameField().getCell(clickX, clickY);
             if (cell && game->getGameState() == GameState::Running) {
-                qDebug() << "Вызываем chordClick для клетки" << clickX << clickY;
+
                 game->chordClick(Point(clickX, clickY));
                 updateField();
 
@@ -625,10 +555,9 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
                 }
             }
 
-            // Сбрасываем флаги после обработки аккорда
             leftButtonPressed = false;
             rightButtonPressed = false;
-            return true; // Событие обработано
+            return true;
         }
 
     }

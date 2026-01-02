@@ -30,10 +30,8 @@ void Cell::setAdjacentMines(int count) {
 }
 
 void Cell::setCoordinates(int newX, int newY) {
-
     this->x = newX;
     this->y = newY;
-
 }
 
 bool Cell::getIsMine() const {

@@ -12,7 +12,7 @@ public:
     static const QString TOTAL_TIME_KEY;
     static const QString BEST_TIME_KEY;
 
-    static constexpr double IN_PROCENTS = 100.0; // Для перевода в проценты
+    static constexpr double IN_PERCENTS = 100.0; // Для перевода в проценты
 
 private:
 

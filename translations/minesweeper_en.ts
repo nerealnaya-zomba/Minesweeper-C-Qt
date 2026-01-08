@@ -45,20 +45,20 @@
     <message>
         <location filename="../customdifficultywindow.ui" line="169"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="205"/>
-        <source>Ширина</source>
-        <translation>Width</translation>
+        <source>Ширина (9-40)</source>
+        <translation>Width (9-40)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.ui" line="228"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="206"/>
-        <source>Высота</source>
-        <translation>Height</translation>
+        <source>Высота (9-30)</source>
+        <translation>Height (9-30)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.ui" line="287"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="207"/>
-        <source>Мины</source>
-        <translation>Mines</translation>
+        <source>Мины (1-199)</source>
+        <translation>Mines (1-199)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="24"/>
@@ -68,21 +68,21 @@
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="31"/>
-        <source>- Минимальный размер поля 5x5
-</source>
-        <translation>- Minimum field size is 5x5</translation>
-    </message>
-    <message>
-        <location filename="../customdifficultywindow.cpp" line="34"/>
         <source>- Количество мин должно быть меньше количества клеток
 </source>
         <translation>- The number of mines should be less than the number of cells</translation>
     </message>
     <message>
-        <location filename="../customdifficultywindow.cpp" line="37"/>
+        <location filename="../customdifficultywindow.cpp" line="34"/>
         <source>- Слишком много мин (максимум 25% от общего числа клеток)
 </source>
         <translation>- Too many mines (maximum 25% of the total number of cells)</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="37"/>
+        <source>- Слишком мало мин (минимум 10% от общего числа клеток)
+</source>
+        <translation>- Too few mines (at least 10% of the total number of cells)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="40"/>
@@ -204,25 +204,25 @@
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="267"/>
-        <location filename="../gamewindow.cpp" line="550"/>
+        <location filename="../gamewindow.cpp" line="548"/>
         <source>Победа</source>
         <translation>Win</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="267"/>
-        <location filename="../gamewindow.cpp" line="550"/>
+        <location filename="../gamewindow.cpp" line="548"/>
         <source>Ты выиграл!</source>
         <translation>You won!</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="269"/>
-        <location filename="../gamewindow.cpp" line="552"/>
+        <location filename="../gamewindow.cpp" line="550"/>
         <source>Поражение</source>
         <translation>Defeat</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="269"/>
-        <location filename="../gamewindow.cpp" line="552"/>
+        <location filename="../gamewindow.cpp" line="550"/>
         <source>Мины!</source>
         <translation>Mines!</translation>
     </message>
@@ -230,10 +230,6 @@
         <location filename="../gamewindow.cpp" line="335"/>
         <source>Стратегия изменена: %1</source>
         <translation>Strategy is changed: %1</translation>
-    </message>
-    <message>
-        <source>Minesweeper</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

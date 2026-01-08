@@ -69,7 +69,9 @@ void Game::endGame(bool won) {
 
     gameState = won ? GameState::Won : GameState::Lost;
 
-    if (!won) {
+    if (won) {
+        field.flagsAllRemainingMines();
+    } else {
         field.revealAllMines();
     }
 

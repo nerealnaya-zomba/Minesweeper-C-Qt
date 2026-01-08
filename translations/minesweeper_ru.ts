@@ -45,20 +45,20 @@
     <message>
         <location filename="../customdifficultywindow.ui" line="169"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="205"/>
-        <source>Ширина</source>
-        <translation>Ширина</translation>
+        <source>Ширина (9-40)</source>
+        <translation>Ширина (9-40)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.ui" line="228"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="206"/>
-        <source>Высота</source>
-        <translation>Высота</translation>
+        <source>Высота (9-30)</source>
+        <translation>Высота (9-30)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.ui" line="287"/>
         <location filename="../build/Desktop_Qt_6_9_2_MinGW_64_bit-u0420u0435u043bu0438u0437/MinesweeperProject_autogen/include/ui_customdifficultywindow.h" line="207"/>
-        <source>Мины</source>
-        <translation>Мины</translation>
+        <source>Мины (1-199)</source>
+        <translation>Мины (1-199)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="24"/>
@@ -68,21 +68,21 @@
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="31"/>
-        <source>- Минимальный размер поля 5x5
-</source>
-        <translation>- Минимальный размер поля 5x5</translation>
-    </message>
-    <message>
-        <location filename="../customdifficultywindow.cpp" line="34"/>
         <source>- Количество мин должно быть меньше количества клеток
 </source>
         <translation>- Количество мин должно быть меньше количества клеток</translation>
     </message>
     <message>
-        <location filename="../customdifficultywindow.cpp" line="37"/>
+        <location filename="../customdifficultywindow.cpp" line="34"/>
         <source>- Слишком много мин (максимум 25% от общего числа клеток)
 </source>
         <translation>- Слишком много мин (максимум 25% от общего числа клеток)</translation>
+    </message>
+    <message>
+        <location filename="../customdifficultywindow.cpp" line="37"/>
+        <source>- Слишком мало мин (минимум 10% от общего числа клеток)
+</source>
+        <translation>- Слишком мало мин (минимум 10% от общего числа клеток)</translation>
     </message>
     <message>
         <location filename="../customdifficultywindow.cpp" line="40"/>
@@ -204,25 +204,25 @@
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="267"/>
-        <location filename="../gamewindow.cpp" line="550"/>
+        <location filename="../gamewindow.cpp" line="548"/>
         <source>Победа</source>
         <translation>Победа</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="267"/>
-        <location filename="../gamewindow.cpp" line="550"/>
+        <location filename="../gamewindow.cpp" line="548"/>
         <source>Ты выиграл!</source>
         <translation>Ты выиграл!</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="269"/>
-        <location filename="../gamewindow.cpp" line="552"/>
+        <location filename="../gamewindow.cpp" line="550"/>
         <source>Поражение</source>
         <translation>Поражение</translation>
     </message>
     <message>
         <location filename="../gamewindow.cpp" line="269"/>
-        <location filename="../gamewindow.cpp" line="552"/>
+        <location filename="../gamewindow.cpp" line="550"/>
         <source>Мины!</source>
         <translation>Мины!</translation>
     </message>

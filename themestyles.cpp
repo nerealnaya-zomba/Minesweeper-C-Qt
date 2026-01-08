@@ -20,7 +20,7 @@ QString ThemeStyles::getGameClosedCellStyle(const QString& themeID)
     if (themeID == "dark") {
         return R"(
             QPushButton {
-                background: #555555; /* Темнее, чем в старом коде */
+                background: #555555;
                 border-top: 1px solid #888888;
                 border-left: 1px solid #888888;
                 border-right: 1px solid #333333;

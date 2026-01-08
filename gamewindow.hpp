@@ -18,7 +18,7 @@ class GameWindow : public QMainWindow
 public:
 
     static constexpr int DEFAULT_CELL_SIZE = 30; // Размер клетки
-    static constexpr int CELL_SPACING = 1; // Отступ м/д клетками
+    static constexpr int CELL_SPACING = 1; // Отступ между клетками
 
     static constexpr int MIN_FIELD_WIDTH_FOR_ALIGNMENT = 280; // Значение для центрирования поля
 
@@ -29,7 +29,7 @@ private:
     std::unique_ptr<Ui::GameWindow> ui;
     std::unique_ptr<Game> game;
     std::shared_ptr<Settings> currentSettings;
-    QVector<QVector<QPointer<QPushButton>>> buttons; // Двумерный массив для клеток
+    QVector<QVector<QPointer<QPushButton>>> buttons;
 
     bool leftButtonPressed;
     bool rightButtonPressed;
@@ -53,6 +53,8 @@ public:
     void onChordClick(int x, int y);
 
     void handleMouseClick(int x, int y, Qt::MouseButton button);
+
+    void checkGameResult();
 
     void updateWindowTitle();
     void updateField();

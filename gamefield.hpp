@@ -38,6 +38,7 @@ public:
 
     void countAdjacentMines();
     bool checkWin();
+    void flagsAllRemainingMines();
     void revealAllMines();
     void resetField();
 

@@ -27,14 +27,14 @@ void CustomDifficultyWindow::setupConnections() {
             int mines = getMines();
             int totalCells = width * height;
 
-            if (width < 5 || height < 5) {
-                errorMsg += tr("- Минимальный размер поля 5x5\n");
-            }
             if (mines >= totalCells) {
                 errorMsg += tr("- Количество мин должно быть меньше количества клеток\n");
             }
             if (mines > totalCells * 0.25) {
                 errorMsg += tr("- Слишком много мин (максимум 25% от общего числа клеток)\n");
+            }
+            if (mines < totalCells * 0.1) {
+                errorMsg += tr("- Слишком мало мин (минимум 10% от общего числа клеток)\n");
             }
 
             QMessageBox::warning(this, tr("Некорректные данные"), errorMsg);
@@ -58,6 +58,10 @@ bool CustomDifficultyWindow::isValid() const {
     }
 
     if (mines > totalCells * 0.25) { // Максимум 25% клеток могут быть минами
+        return false;
+    }
+
+    if (mines < totalCells * 0.1) { // Минимум 10% клеток должны быть минами
         return false;
     }
 

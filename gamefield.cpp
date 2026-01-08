@@ -10,12 +10,12 @@ GameField::GameField(const Difficulty& difficulty, std::shared_ptr<MinePlacement
       minePlacer(minePlacerPtr)
 {
 
-    grid.resize(height); // Создаём 'height' строк
+    grid.resize(height);
     for (int i = 0; i < height; i++) {
-        grid[i].resize(width); // Создаём 'width' столбцов в каждой строке
+        grid[i].resize(width);
         for (int j = 0; j < width; j++) {
-            grid[i][j] = std::make_unique<Cell>(); // Создаём через make_unique
-            grid[i][j]->setCoordinates(j, i); // Устанавливаем координаты клетки
+            grid[i][j] = std::make_unique<Cell>();
+            grid[i][j]->setCoordinates(j, i);
         }
     }
 
@@ -47,7 +47,7 @@ bool GameField::revealCell(Point p) {
         return false;
     }
 
-    Cell* cell = grid[p.getY()][p.getX()].get(); // Получаем сырой указатель на Cell
+    Cell* cell = grid[p.getY()][p.getX()].get();
 
     if (cell->getIsRevealed() || cell->getIsFlagged()) {
         return false;
@@ -104,7 +104,6 @@ bool GameField::toggleFlag(Point p) {
 }
 
 // Геттеры //
-
 int GameField::getFlagsPlaced() const {
     return flagsPlaced;
 }
@@ -139,11 +138,10 @@ std::vector<Cell*> GameField::getNeighbours(Point p) {
     int x = p.getX();
     int y = p.getY();
 
-    // Перебираем все 8 возможных соседей //
     for (int dy = -1; dy <= 1; ++dy) {
         for (int dx = -1; dx <= 1; ++dx) {
 
-            if (dx == 0 && dy == 0) continue; // Пропускаем саму ячейку
+            if (dx == 0 && dy == 0) continue;
 
             int nx = x + dx;
             int ny = y + dy;
@@ -162,6 +160,7 @@ void GameField::setTotalMines(int totalMines) {
     this->totalMines = totalMines;
 }
 
+// Подсчёт кол-ва мин в соседних клетках //
 void GameField::countAdjacentMines() {
 
     for (int y = 0; y < height; ++y) {
@@ -200,9 +199,20 @@ void GameField::revealAllMines() {
 
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-
             if (grid[y][x]->getIsMine()) {
                 grid[y][x]->setRevealed(true);
+            }
+        }
+    }
+}
+
+// Установка флажков на оставшиеся мины при победе //
+void GameField::flagsAllRemainingMines() {
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            if (grid[y][x]->getIsMine() && !grid[y][x]->getIsFlagged()) {
+                grid[y][x]->setFlagged(true);
+                flagsPlaced++;
             }
         }
     }
@@ -212,12 +222,10 @@ void GameField::resetField() {
 
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-
             grid[y][x]->setMine(false);
             grid[y][x]->setRevealed(false);
             grid[y][x]->setFlagged(false);
             grid[y][x]->setAdjacentMines(0);
-
         }
     }
 

@@ -63,7 +63,6 @@ public:
 
 private:
 
-    // Создать окно //
     template<typename TWindow, typename... Args>
     static TWindow* createWindow(QWidget* parent, Args&&... args) {
         TWindow* window = new TWindow(std::forward<Args>(args)..., parent);

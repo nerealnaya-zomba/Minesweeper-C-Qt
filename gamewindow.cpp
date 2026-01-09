@@ -248,7 +248,7 @@ void GameWindow::handleMouseClick(int x, int y, Qt::MouseButton button) {
     if (!game) return;
 
     const Cell* cell = game->getGameField().getCell(x, y);
-    if (!cell && cell->getIsRevealed()) return;
+    if (!cell || cell->getIsRevealed()) return;
 
     // Левый клик - открытие клетки //
     if (button == Qt::LeftButton) {

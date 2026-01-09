@@ -134,20 +134,26 @@ void Game::chordClick(Point clickPoint) {
         }
     }
 
-    if (flaggedCount == cell->getAdjacentMines()) {
-        // Открываем все неоткрытые и не помеченые флагом клетки //
-        for (Cell* neighbour : neighbours) {
-            if (neighbour && !neighbour->getIsRevealed() && !neighbour->getIsFlagged()) {
+    if (flaggedCount != cell->getAdjacentMines()) {
+        return;  // Если флагов не столько же, сколько мин - ничего не делаем
+    }
 
-                Point neighbourPoint(neighbour->getX(), neighbour->getY());
-                bool revealSuccessful = field.revealCell(neighbourPoint);
+    // Открываем соседей
+    bool hitMine = false;
+    for (Cell* neighbour : neighbours) {
+        if (neighbour && !neighbour->getIsRevealed() && !neighbour->getIsFlagged()) {
+            Point neighbourPoint(neighbour->getX(), neighbour->getY());
+            bool revealSuccessful = field.revealCell(neighbourPoint);
 
-                if (!revealSuccessful && neighbour->getIsMine()) {
-                    endGame(false);
-                    return;
-                }
+            if (!revealSuccessful && neighbour->getIsMine()) {
+                hitMine = true;
             }
         }
+    }
+
+    if (hitMine) {
+        endGame(false);
+        return;
     }
 
     if (field.checkWin()) {

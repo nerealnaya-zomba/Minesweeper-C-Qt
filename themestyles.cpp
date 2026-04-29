@@ -12,7 +12,17 @@ QString ThemeStyles::getPreviewStyleSheet(const QString& themeID)
 }
 
 QString ThemeStyles::getGameMineStyle() {
-    return "background: red; border: 1px solid darkred;";
+    return R"(
+        QPushButton {
+            background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                        stop:0 #ff6b5c, stop:1 #b91c1c);
+            border: 1px solid #7f1d1d;
+            border-radius: 5px;
+        }
+        QPushButton:disabled {
+            color: #ffffff;
+        }
+    )";
 }
 
 QString ThemeStyles::getGameClosedCellStyle(const QString& themeID)
@@ -20,30 +30,36 @@ QString ThemeStyles::getGameClosedCellStyle(const QString& themeID)
     if (themeID == "dark") {
         return R"(
             QPushButton {
-                background: #555555;
-                border-top: 1px solid #888888;
-                border-left: 1px solid #888888;
-                border-right: 1px solid #333333;
-                border-bottom: 1px solid #333333;
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                            stop:0 #3f5162, stop:1 #263747);
+                border: 1px solid #6b7d8f;
+                border-radius: 5px;
+                color: #ffd166;
             }
             QPushButton:pressed {
-                border: 1px inset gray;
-                background: #444444;
+                background: #21313f;
+                border: 1px solid #9fb4c7;
+            }
+            QPushButton:disabled {
+                color: #ffd166;
             }
         )";
     }
     // default //
     return R"(
         QPushButton {
-            background: #c0c0c0;
-            border-top: 1px solid white;
-            border-left: 1px solid white;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                        stop:0 #f7f3e8, stop:1 #d7e7df);
+            border: 1px solid #8db1a1;
+            border-radius: 5px;
+            color: #d94f45;
         }
         QPushButton:pressed {
-            border: 1px inset gray;
-            background: #b0b0b0;
+            background: #c3ddd1;
+            border: 1px solid #4d8070;
+        }
+        QPushButton:disabled {
+            color: #d94f45;
         }
     )";
 }
@@ -51,26 +67,82 @@ QString ThemeStyles::getGameClosedCellStyle(const QString& themeID)
 QString ThemeStyles::getGameOpenedCellStyle(const QString& themeID)
 {
     if (themeID == "dark") {
-        return "background: #3d3d3d; border: 1px solid #555;";
+        return R"(
+            QPushButton {
+                background: #18242f;
+                border: 1px solid #334b5e;
+                border-radius: 4px;
+            }
+            QPushButton:disabled {
+                color: inherit;
+            }
+        )";
     }
     // default //
-    return "background: #e0e0e0; border: 1px solid gray;";
+    return R"(
+        QPushButton {
+            background: #f8fbf7;
+            border: 1px solid #c5d8cd;
+            border-radius: 4px;
+        }
+        QPushButton:disabled {
+            color: inherit;
+        }
+    )";
 }
 
 QString ThemeStyles::darkStyleSheet() {
     return R"(
         QMainWindow, QDialog {
-            background-color: #2d2d2d;
+            background-color: #121a22;
         }
         QLabel {
-            color: white;
+            color: #edf6f9;
         }
         QPushButton {
-            background-color: #3d3d3d;
-            color: white;
+            background-color: #243443;
+            color: #f8fafc;
+            border: 1px solid #486173;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background-color: #2f4354;
+        }
+        QPushButton:pressed {
+            background-color: #1d2a36;
         }
         QGroupBox {
-            color: white;
+            color: #edf6f9;
+            border: 1px solid #3a5366;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding-top: 8px;
+        }
+        QMenuBar {
+            background: #17232d;
+            color: #edf6f9;
+        }
+        QMenuBar::item:selected, QMenu::item:selected {
+            background: #2f7d79;
+        }
+        QMenu {
+            background: #17232d;
+            color: #edf6f9;
+            border: 1px solid #3a5366;
+        }
+        QStatusBar {
+            background: #101820;
+            color: #a8dadc;
+        }
+        QLabel#minesLabel, QLabel#timerLabel {
+            color: #ffd166;
+            background: #0b1117;
+            border: 1px solid #40576a;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
         }
     )";
 }
@@ -78,14 +150,57 @@ QString ThemeStyles::darkStyleSheet() {
 QString ThemeStyles::lightStyleSheet() {
     return R"(
         QMainWindow, QDialog {
-            background-color: #f0f0f0;
+            background-color: #edf6f1;
         }
         QLabel {
-            color: black;
+            color: #1f2933;
         }
         QPushButton {
-            background-color: #e0e0e0;
-            color: black;
+            background-color: #ffffff;
+            color: #1f2933;
+            border: 1px solid #9fc5b5;
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-weight: 600;
+        }
+        QPushButton:hover {
+            background-color: #f5fbf8;
+            border-color: #5e9b8a;
+        }
+        QPushButton:pressed {
+            background-color: #dbeee6;
+        }
+        QGroupBox {
+            color: #1f2933;
+            border: 1px solid #bdd6cc;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding-top: 8px;
+        }
+        QMenuBar {
+            background: #d8ece3;
+            color: #1f2933;
+        }
+        QMenuBar::item:selected, QMenu::item:selected {
+            background: #78b7a6;
+            color: #ffffff;
+        }
+        QMenu {
+            background: #ffffff;
+            color: #1f2933;
+            border: 1px solid #bdd6cc;
+        }
+        QStatusBar {
+            background: #d8ece3;
+            color: #2f5f55;
+        }
+        QLabel#minesLabel, QLabel#timerLabel {
+            color: #184e47;
+            background: #fffaf0;
+            border: 1px solid #e8c36c;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-weight: 700;
         }
     )";
 }
@@ -93,26 +208,33 @@ QString ThemeStyles::lightStyleSheet() {
 QString ThemeStyles::darkPreviewStyleSheet() {
     return R"(
         QDialog {
-            background-color: #2d2d2d;
+            background-color: #121a22;
         }
         QLabel {
-            color: white;
+            color: #edf6f9;
         }
         QPushButton {
-            background-color: #3d3d3d;
-            color: white;
+            background-color: #243443;
+            color: #f8fafc;
+            border: 1px solid #486173;
+            border-radius: 6px;
+            padding: 6px 10px;
         }
         QRadioButton {
-            color: white;
+            color: #edf6f9;
         }
         QCheckBox {
-            color: white;
+            color: #edf6f9;
         }
         QGroupBox {
-            color: white;
+            color: #edf6f9;
+            border: 1px solid #3a5366;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding-top: 8px;
         }
         QFrame {
-            background-color: #2d2d2d;
+            background-color: #121a22;
         }
     )";
 }
@@ -120,26 +242,33 @@ QString ThemeStyles::darkPreviewStyleSheet() {
 QString ThemeStyles::lightPreviewStyleSheet() {
     return R"(
         QDialog {
-            background-color: #f0f0f0;
+            background-color: #edf6f1;
         }
         QLabel {
-            color: black;
+            color: #1f2933;
         }
         QPushButton {
-            background-color: #e0e0e0;
-            color: black;
+            background-color: #ffffff;
+            color: #1f2933;
+            border: 1px solid #9fc5b5;
+            border-radius: 6px;
+            padding: 6px 10px;
         }
         QRadioButton {
-            color: black;
+            color: #1f2933;
         }
         QCheckBox {
-            color: black;
+            color: #1f2933;
         }
         QGroupBox {
-            color: black;
+            color: #1f2933;
+            border: 1px solid #bdd6cc;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding-top: 8px;
         }
         QFrame {
-            background-color: #f0f0f0;
+            background-color: #edf6f1;
         }
     )";
 }

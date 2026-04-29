@@ -32,8 +32,8 @@ SettingsWindow::~SettingsWindow() = default;
 // Инициализация тем //
 void SettingsWindow::initThemes() {
     themes = {
-        {"default", "Стандартная", ":/images/smile_default.svg"},
-        {"dark", "Темная", ":/images/smile_dark.svg"},
+        {"default", "Стандартная", ":/images/smile_default.png"},
+        {"dark", "Темная", ":/images/smile_dark.png"},
     };
 }
 

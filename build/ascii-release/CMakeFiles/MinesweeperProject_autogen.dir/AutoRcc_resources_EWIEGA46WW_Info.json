@@ -1,0 +1,37 @@
+{
+	"BUILD_DIR" : "C:/work/minesweeper/build/ascii-release/MinesweeperProject_autogen",
+	"CMAKE_BINARY_DIR" : "C:/work/minesweeper/build/ascii-release",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/work/minesweeper/build/ascii-release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/work/minesweeper",
+	"CMAKE_SOURCE_DIR" : "C:/work/minesweeper",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/work/minesweeper/build/ascii-release/MinesweeperProject_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/work/minesweeper/mine.ico",
+		"C:/work/minesweeper/images/smile_default.png",
+		"C:/work/minesweeper/images/smile_dark.png",
+		"C:/work/minesweeper/images/mine.png",
+		"C:/work/minesweeper/themes/dark.png",
+		"C:/work/minesweeper/sounds/flag.wav",
+		"C:/work/minesweeper/sounds/restart.wav",
+		"C:/work/minesweeper/sounds/lose.wav",
+		"C:/work/minesweeper/sounds/reveal.wav",
+		"C:/work/minesweeper/sounds/unflag.wav",
+		"C:/work/minesweeper/sounds/win.wav",
+		"C:/work/minesweeper/translations/minesweeper_en.qm",
+		"C:/work/minesweeper/translations/minesweeper_ru.qm"
+	],
+	"LOCK_FILE" : "C:/work/minesweeper/build/ascii-release/CMakeFiles/MinesweeperProject_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/Qt-6.10.2/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/work/minesweeper/build/ascii-release/CMakeFiles/MinesweeperProject_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/work/minesweeper/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

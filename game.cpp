@@ -27,21 +27,19 @@ void Game::startGame(const Point& safeStartPoint) {
 
     int numMinesToPlace = currentDifficulty.getMines();
     minePlacer->placeMines(field, numMinesToPlace, safeStartPoint);
-    field.countAdjacentMines();
 
-    // Если мина попала в первую ячейку //
-    if (field.getCell(safeStartPoint.getX(), safeStartPoint.getY())->getIsMine())
-    {
-        endGame(false);
-        return;
+    if (const Cell* startCell = field.getCell(safeStartPoint.getX(), safeStartPoint.getY());
+        startCell && startCell->getIsMine()) {
+        field.relocateMine(safeStartPoint);
     }
+
+    field.countAdjacentMines();
 
     this->gameState = GameState::Running;
     field.revealCell(safeStartPoint);
 
     timer.restart();
     timer.start();
-
 }
 
 void Game::restartGame() {
@@ -52,11 +50,10 @@ void Game::restartGame() {
 
     field.setTotalMines(currentDifficulty.getMines());
 
-    this->safeStartPoint = Point(-1, -1); // Сбрасываем безопасную точку
+    this->safeStartPoint = Point(-1, -1);
 
     timer.restart();
     timer.stop();
-
 }
 
 void Game::endGame(bool won) {
@@ -74,7 +71,6 @@ void Game::endGame(bool won) {
     } else {
         field.revealAllMines();
     }
-
 }
 
 void Game::cellClick(Point clickPoint) {
@@ -84,9 +80,10 @@ void Game::cellClick(Point clickPoint) {
     }
 
     const Cell* cell = field.getCell(clickPoint.getX(), clickPoint.getY());
-    if (!cell) return;
+    if (!cell) {
+        return;
+    }
 
-    // Не открываем клетку с флажком //
     if (cell->getIsFlagged()) {
         return;
     }
@@ -100,7 +97,6 @@ void Game::cellClick(Point clickPoint) {
 
     if (field.checkWin()) {
         endGame(true);
-        return;
     }
 }
 
@@ -109,8 +105,8 @@ void Game::flagToggle(Point flagPoint) {
     if (gameState != GameState::Running && gameState != GameState::Waiting) {
         return;
     }
-    field.toggleFlag(flagPoint);
 
+    field.toggleFlag(flagPoint);
 }
 
 void Game::chordClick(Point clickPoint) {
@@ -127,7 +123,6 @@ void Game::chordClick(Point clickPoint) {
     auto neighbours = field.getNeighbours(clickPoint);
     int flaggedCount = 0;
 
-    // Считаем кол-во флагов вокруг //
     for (Cell* neighbour : neighbours) {
         if (neighbour && neighbour->getIsFlagged()) {
             flaggedCount++;
@@ -135,10 +130,9 @@ void Game::chordClick(Point clickPoint) {
     }
 
     if (flaggedCount != cell->getAdjacentMines()) {
-        return;  // Если флагов не столько же, сколько мин - ничего не делаем
+        return;
     }
 
-    // Открываем соседей
     bool hitMine = false;
     for (Cell* neighbour : neighbours) {
         if (neighbour && !neighbour->getIsRevealed() && !neighbour->getIsFlagged()) {
@@ -159,10 +153,8 @@ void Game::chordClick(Point clickPoint) {
     if (field.checkWin()) {
         endGame(true);
     }
-
 }
 
-// Геттеры //
 GameField& Game::getGameField() {
     return field;
 }
@@ -191,7 +183,6 @@ std::shared_ptr<Statistics> Game::getStatistics() {
     return gameStatistics;
 }
 
-// Сеттеры //
 void Game::setCurrentDifficulty(const Difficulty& newDifficulty) {
     this->currentDifficulty = newDifficulty;
     restartGame();

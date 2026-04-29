@@ -17,6 +17,7 @@ private:
     QString language;
     bool soundEnabled;
     QString theme;
+    bool autoSave;
 
 public:
 
@@ -27,6 +28,8 @@ public:
     void load();
     void save() const;
     void resetToDefaults();
+    void setAutoSave(bool enabled);
+    bool getAutoSave() const;
 
     const QString& getLanguage() const;
     bool getSoundEnabled() const;

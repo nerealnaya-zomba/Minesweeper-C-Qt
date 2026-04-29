@@ -1,11 +1,14 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QMap>
+#include <QPoint>
 #include <QPushButton>
 #include <QPointer>
 #include <memory>
 
 #include "game.hpp"
+#include "soundmanager.hpp"
 
 namespace Ui {
 class GameWindow;
@@ -30,6 +33,8 @@ private:
     std::unique_ptr<Game> game;
     std::shared_ptr<Settings> currentSettings;
     QVector<QVector<QPointer<QPushButton>>> buttons;
+    SoundManager soundManager;
+    GameState announcedGameState;
 
     bool leftButtonPressed;
     bool rightButtonPressed;
@@ -62,6 +67,11 @@ public:
     void updateSmileIcon();
     void updateMinesCounter();
     void updateMenuLanguage();
+    void animateCellReveal(QPushButton* button);
+    void animateCellPulse(QPushButton* button);
+    void animateFieldIntro();
+    void animateWidgetPulse(QWidget* widget, qreal startOpacity = 0.45, int duration = 180);
+    void syncSoundSettings();
 
     QPushButton* getButtonAt(int x, int y);
 

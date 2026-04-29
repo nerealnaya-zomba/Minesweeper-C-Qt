@@ -108,6 +108,10 @@ int GameField::getFlagsPlaced() const {
     return flagsPlaced;
 }
 
+int GameField::getCellsRevealed() const {
+    return cellsRevealed;
+}
+
 int GameField::getWidth() const {
     return width;
 }
@@ -166,6 +170,8 @@ void GameField::countAdjacentMines() {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
 
+            grid[y][x]->setAdjacentMines(0);
+
             if (grid[y][x]->getIsMine()) continue;
 
             int mineCount = 0;
@@ -195,6 +201,31 @@ bool GameField::checkWin() {
     return cellsRevealed == (width * height - totalMines);
 }
 
+bool GameField::relocateMine(Point minePoint) {
+
+    Cell* sourceCell = getCell(minePoint.getX(), minePoint.getY());
+    if (!sourceCell || !sourceCell->getIsMine()) {
+        return false;
+    }
+
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            if (x == minePoint.getX() && y == minePoint.getY()) {
+                continue;
+            }
+
+            Cell* targetCell = getCell(x, y);
+            if (targetCell && !targetCell->getIsMine()) {
+                sourceCell->setMine(false);
+                targetCell->setMine(true);
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void GameField::revealAllMines() {
 
     for (int y = 0; y < height; ++y) {
@@ -208,11 +239,17 @@ void GameField::revealAllMines() {
 
 // Установка флажков на оставшиеся мины при победе //
 void GameField::flagsAllRemainingMines() {
+    flagsPlaced = 0;
+
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
-            if (grid[y][x]->getIsMine() && !grid[y][x]->getIsFlagged()) {
-                grid[y][x]->setFlagged(true);
+            if (grid[y][x]->getIsMine()) {
+                if (!grid[y][x]->getIsFlagged()) {
+                    grid[y][x]->setFlagged(true);
+                }
                 flagsPlaced++;
+            } else if (grid[y][x]->getIsFlagged()) {
+                grid[y][x]->setFlagged(false);
             }
         }
     }

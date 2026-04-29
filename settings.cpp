@@ -10,7 +10,8 @@ const QString Settings::LANGUAGE_KEY = "language";
 Settings::Settings()
     : language("ru"),
       soundEnabled(true),
-      theme("default")
+      theme("default"),
+      autoSave(true)
 {
     Settings::load();
 }
@@ -23,6 +24,7 @@ std::shared_ptr<Settings> Settings::clone() const {
     cloned->language = this->language;
     cloned->soundEnabled = this->soundEnabled;
     cloned->theme = this->theme;
+    cloned->autoSave = false;
 
     return cloned;
 }
@@ -73,7 +75,17 @@ void Settings::resetToDefaults() {
     soundEnabled = true;
     theme = "default";
 
-    save();
+    if (autoSave) {
+        save();
+    }
+}
+
+void Settings::setAutoSave(bool enabled) {
+    autoSave = enabled;
+}
+
+bool Settings::getAutoSave() const {
+    return autoSave;
 }
 
 // Геттеры //
@@ -93,18 +105,24 @@ const QString& Settings::getTheme() const {
 void Settings::setLanguage(const QString& lang) {
     if (lang != language) {
         language = lang;
-        save();
+        if (autoSave) {
+            save();
+        }
     }
 }
 
 void Settings::setSoundEnabled(bool enabled) {
     soundEnabled = enabled;
-    save();
+    if (autoSave) {
+        save();
+    }
 }
 
 void Settings::setTheme(const QString& themeName) {
     if (themeName != theme) {
         theme = themeName;
-        save();
+        if (autoSave) {
+            save();
+        }
     }
 }

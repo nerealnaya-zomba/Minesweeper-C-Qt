@@ -1,0 +1,9 @@
+C:/work/minesweeper/build/ascii-release/CMakeFiles/MinesweeperProject.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/edit_cache.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/rebuild_cache.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/list_install_components.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/install.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/install/local.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/install/strip.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/MinesweeperProject_autogen_timestamp_deps.dir
+C:/work/minesweeper/build/ascii-release/CMakeFiles/MinesweeperProject_autogen.dir

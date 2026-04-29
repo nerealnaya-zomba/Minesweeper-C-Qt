@@ -2,9 +2,15 @@
 <RCC version="1.0">
 	<qresource prefix="/">
 		<file>mine.ico</file>
-		<file>images/smile_default.svg</file>
-		<file>images/smile_dark.svg</file>
-		<file>images/mine.svg</file>
+		<file>images/smile_default.png</file>
+		<file>images/smile_dark.png</file>
+		<file>images/mine.png</file>
+		<file>sounds/reveal.wav</file>
+		<file>sounds/flag.wav</file>
+		<file>sounds/unflag.wav</file>
+		<file>sounds/restart.wav</file>
+		<file>sounds/win.wav</file>
+		<file>sounds/lose.wav</file>
 		<file>themes/dark.png</file>
 		<file>translations/minesweeper_ru.qm</file>
 		<file>translations/minesweeper_en.qm</file>

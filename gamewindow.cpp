@@ -1,9 +1,19 @@
 #include "gamewindow.hpp"
 #include "ui_gamewindow.h"
 
+#include <QApplication>
+#include <QAbstractAnimation>
+#include <QCloseEvent>
+#include <QEasingCurve>
+#include <QGraphicsOpacityEffect>
+#include <QGridLayout>
 #include <QMessageBox>
 #include <QMouseEvent>
+#include <QPropertyAnimation>
 #include <QScreen>
+#include <QStatusBar>
+#include <QTimer>
+#include <QVBoxLayout>
 
 #include "aboutprogram.hpp"
 #include "customdifficultywindow.hpp"
@@ -14,9 +24,9 @@
 #include "windowswitcher.hpp"
 
 const QMap<int, QString> GameWindow::NUMBER_COLORS = {
-    {1, "blue"}, {2, "green"}, {3, "red"},
-    {4, "darkblue"}, {5, "darkred"}, {6, "cyan"},
-    {7, "black"}, {8, "gray"}
+    {1, "#2563eb"}, {2, "#16803c"}, {3, "#dc2626"},
+    {4, "#1e3a8a"}, {5, "#9f1239"}, {6, "#0891b2"},
+    {7, "#111827"}, {8, "#64748b"}
 };
 
 GameWindow::GameWindow(const Difficulty& currentDifficulty,
@@ -29,10 +39,10 @@ GameWindow::GameWindow(const Difficulty& currentDifficulty,
       ui(std::make_unique<Ui::GameWindow>()),
       game(nullptr),
       currentSettings(settings),
+      announcedGameState(GameState::Waiting),
       leftButtonPressed(false),
       rightButtonPressed(false)
 {
-
     ui->setupUi(this);
 
     game = std::make_unique<Game>(currentDifficulty, currentStrategy, *currentSettings, statistics);
@@ -40,22 +50,19 @@ GameWindow::GameWindow(const Difficulty& currentDifficulty,
     setupUI(currentDifficulty);
     createGameField();
     setupConnections();
-
+    syncSoundSettings();
 }
 
 GameWindow::~GameWindow() = default;
 
 void GameWindow::setupConnections() {
 
-    // Игровой таймер //
     connect(&game->getTimer(), &GameTimer::timeUpdated, [this](const QString& time) {
         ui->timerLabel->setText(time);
     });
 
-    // Кнопка рестарта (меню + кнопка в интерфейсе) //
     connect(ui->restartTrigger, &QAction::triggered, ui->restartButton, &QPushButton::click);
 
-    // Меню сложности //
     connect(ui->beginnerDifficulty, &QAction::triggered, this, [this]() {
         changeDifficulty(Difficulty::beginner());
     });
@@ -76,7 +83,6 @@ void GameWindow::setupConnections() {
         dialog.exec();
     });
 
-    // Стратегии размещения мин //
     connect(ui->randomMode, &QAction::triggered, this, [this]() {
         setMinePlacementStrategy("random");
     });
@@ -89,9 +95,7 @@ void GameWindow::setupConnections() {
         setMinePlacementStrategy("clustered");
     });
 
-    // Вспомогательные окна //
     connect(ui->settingsTrigger, &QAction::triggered, this, &GameWindow::showSettingsWindow);
-
     connect(ui->staticticsTrigger, &QAction::triggered, this, &GameWindow::showStatisticsWindow);
 
     connect(ui->howToPlayTrigger, &QAction::triggered, this, [this]() {
@@ -101,14 +105,13 @@ void GameWindow::setupConnections() {
     connect(ui->aboutProgramTrigger, &QAction::triggered, this, [this]() {
         WindowSwitcher::switchToModal<AboutProgram>(this);
     });
-
 }
 
 void GameWindow::setupUI(const Difficulty& currentDifficulty) {
 
+    announcedGameState = GameState::Waiting;
     updateSmileIcon();
 
-    // Отображаем количество мин с ведущими нулями //
     int mines = currentDifficulty.getMines();
     ui->minesLabel->setText(QString("%1").arg(mines, 3, 10, QChar('0')));
     ui->timerLabel->setText("000");
@@ -116,27 +119,22 @@ void GameWindow::setupUI(const Difficulty& currentDifficulty) {
     updateWindowTitle();
 }
 
-// Изменение размера экрана в зависимости от сложности //
 void GameWindow::setupWindowSize(int width, int height, int cellSize) {
 
-    // Рассчитываем размер игрового поля с учётом промежутков между клетками //
     int fieldWidth = width * cellSize + (width - 1) * CELL_SPACING;
     int fieldHeight = height * cellSize + (height - 1) * CELL_SPACING;
     ui->gameArea->setFixedSize(fieldWidth, fieldHeight);
 
-    // Высоты элементов интерфейса //
     int menuHeight = ui->menubar->height();
-    int headerHeight = ui->headerWidget->minimumHeight(); // Панель с таймером и счётчиком мин
+    int headerHeight = ui->headerWidget->minimumHeight();
     int statusHeight = ui->statusbar->height();
 
     int minWindowWidth = ui->centralwidget->minimumSize().width();
 
     QMargins margins = ui->centralwidget->layout()->contentsMargins();
 
-    // Итоговая ширина окна: либо по размеру поля, либо минимальная //
     int windowWidth = qMax(fieldWidth + margins.left() + margins.right(), minWindowWidth);
 
-    // Итоговая высота окна: сумма всех элементов + отступы //
     int windowHeight = menuHeight
                        + headerHeight
                        + statusHeight
@@ -146,42 +144,39 @@ void GameWindow::setupWindowSize(int width, int height, int cellSize) {
 
     setFixedSize(windowWidth, windowHeight);
 
-    // Центрирование окна на экране //
     QScreen* screen = QGuiApplication::primaryScreen();
     if (screen) {
         QRect screenGeometry = screen->availableGeometry();
         move(screenGeometry.center() - rect().center());
     }
-
 }
 
 void GameWindow::createGameField() {
 
     int width = game->getGameField().getWidth();
     int height = game->getGameField().getHeight();
-
     const int cellSize = calculateOptimalCellSize(width, height);
 
-    // Создаём двумерный массив кнопок //
     buttons.resize(height);
     for (int y = 0; y < height; y++) {
         buttons[y].resize(width);
     }
 
-    // Создаём Layout игрового поля //
     QGridLayout* grid = new QGridLayout;
     grid->setSpacing(CELL_SPACING);
     grid->setContentsMargins(0, 0, 0, 0);
     grid->setAlignment(Qt::AlignCenter);
 
-    // Создание кнопок-клеток //
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-
             QPointer<QPushButton> btn = new QPushButton();
 
             btn->setFixedSize(cellSize, cellSize);
             btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            btn->setProperty("revealed", false);
+            btn->setProperty("flagged", false);
+            btn->setProperty("mine", false);
+            btn->setProperty("adjacentMines", -1);
 
             QString theme = currentSettings->getTheme();
             btn->setStyleSheet(ThemeStyles::getGameClosedCellStyle(theme));
@@ -190,25 +185,21 @@ void GameWindow::createGameField() {
 
             btn->installEventFilter(this);
 
-            // Левый клик - открытие клетки //
             connect(btn, &QPushButton::clicked, [this, x, y]() {
                 handleMouseClick(x, y, Qt::LeftButton);
             });
 
-            // Правый клик - установка/снятие флажка //
             btn->setContextMenuPolicy(Qt::CustomContextMenu);
             connect(btn, &QPushButton::customContextMenuRequested, [this, x, y]() {
                 handleMouseClick(x, y, Qt::RightButton);
             });
 
             grid->addWidget(btn, y, x);
-
         }
     }
 
     ui->gameArea->setLayout(grid);
 
-    // Если поле маленькое центрируем его //
     if (width * cellSize < MIN_FIELD_WIDTH_FOR_ALIGNMENT) {
         QVBoxLayout* mainLayout = qobject_cast<QVBoxLayout*>(ui->centralwidget->layout());
         if (mainLayout) {
@@ -217,10 +208,10 @@ void GameWindow::createGameField() {
     }
 
     setupWindowSize(width, height, cellSize);
-
+    updateField();
+    animateFieldIntro();
 }
 
-// Вычисление оптимального размера клетки //
 int GameWindow::calculateOptimalCellSize(int width, int height) const {
 
     constexpr int MIN_CELL_SIZE = 20;
@@ -232,11 +223,9 @@ int GameWindow::calculateOptimalCellSize(int width, int height) const {
 
     int cellSize = MAX_CELL_SIZE;
 
-    // Выбираем размер клетки в зависимости от размера поля //
     if (width > HUGE_FIELD || height > HUGE_FIELD) {
         cellSize = MIN_CELL_SIZE;
-    }
-    else if (width > LARGE_FIELD || height > LARGE_FIELD) {
+    } else if (width > LARGE_FIELD || height > LARGE_FIELD) {
         cellSize = MEDIUM_CELL_SIZE;
     }
 
@@ -245,54 +234,94 @@ int GameWindow::calculateOptimalCellSize(int width, int height) const {
 
 void GameWindow::handleMouseClick(int x, int y, Qt::MouseButton button) {
 
-    if (!game) return;
+    if (!game) {
+        return;
+    }
 
     const Cell* cell = game->getGameField().getCell(x, y);
-    if (!cell || cell->getIsRevealed()) return;
+    if (!cell) {
+        return;
+    }
 
-    // Левый клик - открытие клетки //
+    const bool wasRevealed = cell->getIsRevealed();
+    const bool wasFlagged = cell->getIsFlagged();
+
     if (button == Qt::LeftButton) {
+        if (wasRevealed || wasFlagged) {
+            return;
+        }
 
         if (game->getGameState() == GameState::Waiting) {
-            game->startGame(Point(x, y)); // Первый клик - старт игры
-        } else if (game->getGameState() == GameState::Running){
-            game->cellClick(Point(x, y)); // Обычный ход
+            game->startGame(Point(x, y));
+        } else if (game->getGameState() == GameState::Running) {
+            game->cellClick(Point(x, y));
         }
 
         updateField();
+
+        const Cell* updatedCell = game->getGameField().getCell(x, y);
+        if (updatedCell && updatedCell->getIsRevealed() && !wasRevealed) {
+            soundManager.play(SoundManager::Event::Reveal);
+        }
+
         checkGameResult();
-    }
-    // Правый клик - установка/снятие флажка //
-    else if (button == Qt::RightButton) {
+    } else if (button == Qt::RightButton) {
+        if (wasRevealed) {
+            return;
+        }
+
         game->flagToggle(Point(x, y));
+
+        const Cell* updatedCell = game->getGameField().getCell(x, y);
         updateCell(x, y);
         updateMinesCounter();
-    }
 
+        if (updatedCell && updatedCell->getIsFlagged() != wasFlagged) {
+            soundManager.play(updatedCell->getIsFlagged()
+                                  ? SoundManager::Event::Flag
+                                  : SoundManager::Event::Unflag);
+            animateWidgetPulse(ui->minesLabel, 0.55, 150);
+        }
+    }
 }
 
 void GameWindow::checkGameResult() {
 
-    if (game->getGameState() == GameState::Won) {
-        QMessageBox::information(this, tr("Победа"), tr("Ты выиграл!"));
-    } else if (game->getGameState() == GameState::Lost) {
-        QMessageBox::information(this, tr("Поражение"), tr("Мины!"));
-        game->getGameField().revealAllMines();
-        updateField();
+    if (!game) {
+        return;
     }
 
+    GameState currentState = game->getGameState();
+    if (currentState == announcedGameState) {
+        return;
+    }
+
+    announcedGameState = currentState;
+
+    if (currentState == GameState::Won) {
+        updateField();
+        soundManager.play(SoundManager::Event::Win);
+        animateWidgetPulse(ui->restartButton, 0.25, 320);
+        statusBar()->showMessage(tr("Победа! Все мины найдены."), 3000);
+        QMessageBox::information(this, tr("Победа"), tr("Ты выиграл!"));
+    } else if (currentState == GameState::Lost) {
+        updateField();
+        soundManager.play(SoundManager::Event::Lose);
+        animateWidgetPulse(ui->restartButton, 0.25, 320);
+        statusBar()->showMessage(tr("Поражение. Осторожнее с минами."), 3000);
+        QMessageBox::information(this, tr("Поражение"), tr("Мины!"));
+    }
 }
 
-// Сменить сложность во время игры //
 void GameWindow::changeDifficulty(const Difficulty& newDifficulty) {
 
-    if (!game) return;
+    if (!game) {
+        return;
+    }
 
-    auto settings = game->getCurrentSettings();
     auto statistics = game->getStatistics();
     Strategy currentStrategy = game->getCurrentStrategy();
 
-    // Очищаем старое поле в UI //
     if (ui->gameArea->layout()) {
         QLayout* oldLayout = ui->gameArea->layout();
         QLayoutItem* item;
@@ -306,31 +335,35 @@ void GameWindow::changeDifficulty(const Difficulty& newDifficulty) {
     }
     buttons.clear();
 
-    // Создаём игру с новой сложностью //
     game = std::make_unique<Game>(newDifficulty, currentStrategy, *currentSettings, statistics);
+    announcedGameState = GameState::Waiting;
 
     connect(&game->getTimer(), &GameTimer::timeUpdated, [this](const QString& time) {
-        ui->timerLabel->setText(time); // Переподключаем таймер
+        ui->timerLabel->setText(time);
     });
 
     createGameField();
-
     updateMinesCounter();
     updateWindowTitle();
     ui->timerLabel->setText("000");
-
+    statusBar()->showMessage(tr("Сложность изменена"), 2000);
 }
 
 void GameWindow::setMinePlacementStrategy(const QString& strategyName) {
 
-    if (!game) return;
+    if (!game) {
+        return;
+    }
 
     Strategy newStrategy(strategyName);
     game->setCurrentStrategy(newStrategy);
+    announcedGameState = GameState::Waiting;
 
     updateField();
     updateMinesCounter();
     ui->timerLabel->setText("000");
+    animateWidgetPulse(ui->restartButton, 0.45, 160);
+    soundManager.play(SoundManager::Event::Restart);
 
     statusBar()->showMessage(tr("Стратегия изменена: %1").arg(strategyName), 2000);
 }
@@ -341,23 +374,24 @@ void GameWindow::showSettingsWindow() {
     settingsWindow.exec();
 }
 
-// Применить настройки к игре //
 void GameWindow::applyGameSettings() {
 
-    if (!game || !currentSettings) return;
+    if (!game || !currentSettings) {
+        return;
+    }
 
     QString theme = currentSettings->getTheme();
     QString lang = currentSettings->getLanguage();
 
     game->setCurrentSettings(*currentSettings);
 
+    syncSoundSettings();
     updateSmileIcon();
     updateField();
     qApp->setStyleSheet(ThemeStyles::getStyleSheet(theme));
 
     emit languageChanged(lang);
     updateWindowTitle();
-
 }
 
 void GameWindow::showStatisticsWindow() {
@@ -365,29 +399,36 @@ void GameWindow::showStatisticsWindow() {
     dialog.exec();
 }
 
-// Обновить заголовок окна //
 void GameWindow::updateWindowTitle() {
 
-    if (!game || !currentSettings) return;
+    if (!game || !currentSettings) {
+        return;
+    }
 
     QString lang = currentSettings->getLanguage();
     QString diffName = game->getCurrentDifficulty().getName();
 
     if (lang == "ru") {
-        if (diffName == "Beginner") diffName = "Новичок";
-        else if (diffName == "Intermediate") diffName = "Любитель";
-        else if (diffName == "Expert") diffName = "Эксперт";
-        else if (diffName == "Custom") diffName = "Пользовательский";
+        if (diffName == "Beginner") {
+            diffName = "Новичок";
+        } else if (diffName == "Intermediate") {
+            diffName = "Любитель";
+        } else if (diffName == "Expert") {
+            diffName = "Эксперт";
+        } else if (diffName == "Custom") {
+            diffName = "Пользовательский";
+        }
         setWindowTitle("Сапёр - " + diffName);
     } else {
         setWindowTitle("Minesweeper - " + diffName);
     }
-
 }
 
-// Обновить игровое поле //
 void GameWindow::updateField() {
-    if (!game) return;
+
+    if (!game) {
+        return;
+    }
 
     const auto& field = game->getGameField();
     for (int y = 0; y < field.getHeight(); ++y) {
@@ -397,83 +438,146 @@ void GameWindow::updateField() {
     }
 }
 
-// Обновить клетку поля //
 void GameWindow::updateCell(int x, int y) {
 
     auto btn = getButtonAt(x, y);
-    if (!btn || !game) return;
+    if (!btn || !game) {
+        return;
+    }
 
     const Cell* cell = game->getGameField().getCell(x, y);
-    if (!cell) return;
+    if (!cell) {
+        return;
+    }
+
+    const bool wasRevealed = btn->property("revealed").toBool();
+    const bool wasFlagged = btn->property("flagged").toBool();
 
     QString theme = currentSettings->getTheme();
 
-    // Сбрасываем содержание //
     btn->setIcon(QIcon());
     btn->setText("");
 
-    btn->setEnabled(true);
+    const bool interactionAllowed = game->getGameState() == GameState::Waiting
+                                    || game->getGameState() == GameState::Running;
+    btn->setEnabled(interactionAllowed && !cell->getIsRevealed());
 
-    if (cell->getIsRevealed()) { // Открытая клетка
-
-        if (cell->getIsMine()) { // Если клетка - мина
-
-            btn->setIcon(QIcon(":/images/mine.svg"));
-            btn->setIconSize(QSize(20, 20));
+    if (cell->getIsRevealed()) {
+        if (cell->getIsMine()) {
+            btn->setIcon(QIcon(":/images/mine.png"));
+            btn->setIconSize(btn->size() - QSize(6, 6));
             btn->setStyleSheet(ThemeStyles::getGameMineStyle());
-
-        }
-        else if (cell->getAdjacentMines() > 0) {
-
+        } else if (cell->getAdjacentMines() > 0) {
             int countMines = cell->getAdjacentMines();
             btn->setText(QString::number(countMines));
 
             QString color = NUMBER_COLORS.value(countMines, "black");
-            btn->setStyleSheet(ThemeStyles::getGameOpenedCellStyle(theme) +
-                               QString(" color: %1; font-weight: bold;").arg(color));
-
-        }
-        else {
+            btn->setStyleSheet(ThemeStyles::getGameOpenedCellStyle(theme)
+                               + QString(" color: %1; font-weight: bold;").arg(color));
+        } else {
             btn->setStyleSheet(ThemeStyles::getGameOpenedCellStyle(theme));
         }
+    } else if (cell->getIsFlagged()) {
+        btn->setText(QString(QChar(0x2691)));
+        btn->setStyleSheet(ThemeStyles::getGameClosedCellStyle(theme)
+                           + " color: red; font-size: 15px; font-weight: bold;");
+    } else {
+        btn->setStyleSheet(ThemeStyles::getGameClosedCellStyle(theme));
     }
-    else { // Закрытая клетка
 
-        // btn->setEnabled(true);
+    btn->setProperty("revealed", cell->getIsRevealed());
+    btn->setProperty("flagged", cell->getIsFlagged());
+    btn->setProperty("mine", cell->getIsMine());
+    btn->setProperty("adjacentMines", cell->getAdjacentMines());
 
-        if (cell->getIsFlagged()) {
-            btn->setText("🚩");
-            btn->setStyleSheet(ThemeStyles::getGameClosedCellStyle(theme) + " color: red; font-size: 14px;");
-        }
-        else {
-            btn->setStyleSheet(ThemeStyles::getGameClosedCellStyle(theme));
-        }
+    if (!wasRevealed && cell->getIsRevealed()) {
+        animateCellReveal(btn);
+    } else if (wasFlagged != cell->getIsFlagged()) {
+        animateCellPulse(btn);
     }
 }
 
 void GameWindow::updateSmileIcon() {
     QString iconPath = currentSettings->getTheme() == "dark"
-                           ? ":/images/smile_dark.svg"
-                           : ":/images/smile_default.svg";
+                           ? ":/images/smile_dark.png"
+                           : ":/images/smile_default.png";
     ui->restartButton->setIcon(QIcon(iconPath));
 }
 
-// Обновить счётчик количества мин //
 void GameWindow::updateMinesCounter() {
 
-    if (!game) return;
+    if (!game) {
+        return;
+    }
 
     int mines = game->getCurrentDifficulty().getMines();
     int flags = game->getGameField().getFlagsPlaced();
     int remaining = mines - flags;
 
     ui->minesLabel->setText(QString("%1").arg(remaining, 3, 10, QChar('0')));
-
 }
 
-// Геттер для кнопки (UI) //
-QPushButton* GameWindow::getButtonAt(int x, int y)
-{
+void GameWindow::animateCellReveal(QPushButton* button) {
+    animateWidgetPulse(button, 0.15, 120);
+}
+
+void GameWindow::animateCellPulse(QPushButton* button) {
+    animateWidgetPulse(button, 0.35, 170);
+}
+
+void GameWindow::animateFieldIntro() {
+    for (int y = 0; y < buttons.size(); ++y) {
+        for (int x = 0; x < buttons[y].size(); ++x) {
+            QPushButton* button = buttons[y][x];
+            if (!button) {
+                continue;
+            }
+
+            auto* effect = qobject_cast<QGraphicsOpacityEffect*>(button->graphicsEffect());
+            if (!effect) {
+                effect = new QGraphicsOpacityEffect(button);
+                button->setGraphicsEffect(effect);
+            }
+            effect->setOpacity(0.0);
+
+            const int delay = (x + y) * 12;
+            QTimer::singleShot(delay, button, [button, effect]() {
+                QPropertyAnimation* animation = new QPropertyAnimation(effect, "opacity", button);
+                animation->setDuration(180);
+                animation->setStartValue(0.0);
+                animation->setEndValue(1.0);
+                animation->setEasingCurve(QEasingCurve::OutCubic);
+                animation->start(QAbstractAnimation::DeleteWhenStopped);
+            });
+        }
+    }
+}
+
+void GameWindow::animateWidgetPulse(QWidget* widget, qreal startOpacity, int duration) {
+
+    if (!widget) {
+        return;
+    }
+
+    auto* effect = qobject_cast<QGraphicsOpacityEffect*>(widget->graphicsEffect());
+    if (!effect) {
+        effect = new QGraphicsOpacityEffect(widget);
+        effect->setOpacity(1.0);
+        widget->setGraphicsEffect(effect);
+    }
+
+    auto* animation = new QPropertyAnimation(effect, "opacity", widget);
+    animation->setDuration(duration);
+    animation->setStartValue(startOpacity);
+    animation->setEndValue(1.0);
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void GameWindow::syncSoundSettings() {
+    soundManager.setEnabled(currentSettings && currentSettings->getSoundEnabled());
+}
+
+QPushButton* GameWindow::getButtonAt(int x, int y) {
     if (y >= 0 && y < buttons.size() && x >= 0 && x < buttons[y].size()) {
         return buttons[y][x];
     }
@@ -482,22 +586,30 @@ QPushButton* GameWindow::getButtonAt(int x, int y)
 
 void GameWindow::on_restartButton_clicked() {
 
-    if (!game) return;
+    if (!game) {
+        return;
+    }
 
     game->restartGame();
+    announcedGameState = GameState::Waiting;
+
     updateField();
     updateMinesCounter();
-
     ui->timerLabel->setText("000");
+
+    animateFieldIntro();
+    animateWidgetPulse(ui->restartButton, 0.35, 180);
+    soundManager.play(SoundManager::Event::Restart);
+    statusBar()->showMessage(tr("Игра перезапущена"), 1500);
 }
 
-bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
+bool GameWindow::eventFilter(QObject* obj, QEvent* event) {
 
-    // Проверка что объект - кнопка игрового поля //
     QPushButton* button = qobject_cast<QPushButton*>(obj);
-    if (!button) return QMainWindow::eventFilter(obj, event);
+    if (!button) {
+        return QMainWindow::eventFilter(obj, event);
+    }
 
-    // Находим координаты кнопки //
     int clickX = -1;
     int clickY = -1;
     for (int y = 0; y < buttons.size(); ++y) {
@@ -508,7 +620,9 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
                 break;
             }
         }
-        if (clickX != -1) break;
+        if (clickX != -1) {
+            break;
+        }
     }
 
     if (clickX == -1 || clickY == -1) {
@@ -516,28 +630,27 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
     }
 
     if (event->type() == QEvent::MouseButtonPress) {
-
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 
-        // Левая кнопка //
         if (mouseEvent->button() == Qt::LeftButton) {
             leftButtonPressed = true;
-            lastMousePos = mouseEvent->globalPos();
+            lastMousePos = mouseEvent->globalPosition().toPoint();
         }
 
-        // Правая кнопка //
         if (mouseEvent->button() == Qt::RightButton) {
             rightButtonPressed = true;
-            lastMousePos = mouseEvent->globalPos();
+            lastMousePos = mouseEvent->globalPosition().toPoint();
         }
 
-        // Аккорд //
         if (leftButtonPressed && rightButtonPressed) {
-
             const Cell* cell = game->getGameField().getCell(clickX, clickY);
             if (cell && game->getGameState() == GameState::Running) {
+                const int revealedBefore = game->getGameField().getCellsRevealed();
                 game->chordClick(Point(clickX, clickY));
                 updateField();
+                if (game->getGameField().getCellsRevealed() > revealedBefore) {
+                    soundManager.play(SoundManager::Event::Reveal);
+                }
                 checkGameResult();
             }
 
@@ -545,10 +658,7 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
             rightButtonPressed = false;
             return true;
         }
-
-    }
-    else if (event->type() == QEvent::MouseButtonRelease) {
-
+    } else if (event->type() == QEvent::MouseButtonRelease) {
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
 
         if (mouseEvent->button() == Qt::LeftButton) {
@@ -560,11 +670,9 @@ bool GameWindow::eventFilter(QObject* obj, QEvent* event)  {
     }
 
     return QMainWindow::eventFilter(obj, event);
-
 }
 
-void GameWindow::changeEvent(QEvent* event)
-{
+void GameWindow::changeEvent(QEvent* event) {
     if (event->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
         updateWindowTitle();
@@ -572,10 +680,7 @@ void GameWindow::changeEvent(QEvent* event)
     QMainWindow::changeEvent(event);
 }
 
-// Событие при закрытии окна //
-void GameWindow::closeEvent(QCloseEvent* event)
-{
-    qDebug() << "GameWindow closing, current language:" << currentSettings->getLanguage();
-    emit windowClosed(); // Уведомляем MainWindow о закрытии окна
-    QMainWindow::closeEvent(event); // Закрываем окно
+void GameWindow::closeEvent(QCloseEvent* event) {
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
 }

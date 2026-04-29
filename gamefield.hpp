@@ -31,6 +31,7 @@ public:
     const Cell* getCell(int x, int y) const;
     std::vector<Cell*> getNeighbours(Point p);
     int getFlagsPlaced() const;
+    int getCellsRevealed() const;
     int getWidth() const;
     int getHeight() const;
 
@@ -38,6 +39,7 @@ public:
 
     void countAdjacentMines();
     bool checkWin();
+    bool relocateMine(Point minePoint);
     void flagsAllRemainingMines();
     void revealAllMines();
     void resetField();

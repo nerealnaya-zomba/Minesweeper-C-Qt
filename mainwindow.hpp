@@ -1,6 +1,9 @@
 #pragma once
 
+#include <QEvent>
 #include <QMainWindow>
+#include <QPushButton>
+#include <QShowEvent>
 #include <QTranslator>
 
 #include "difficulty.hpp"
@@ -27,6 +30,7 @@ private:
     Strategy currentStrategy;
     std::shared_ptr<Settings> currentSettings;
     std::shared_ptr<Statistics> gameStatistics;
+    bool menuEntranceAnimated;
 
 public:
 
@@ -36,8 +40,13 @@ public:
     void setupConnections();
 
     void applySettings();
+    void setupMenuPresentation();
+    void animateMenuEntrance();
+    void animateButtonPulse(QPushButton* button);
 
     void changeEvent(QEvent* event);
+    void showEvent(QShowEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private slots:
 

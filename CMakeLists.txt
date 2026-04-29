@@ -20,7 +20,7 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
     qt_add_executable(MinesweeperProject
         MANUAL_FINALIZATION
@@ -42,6 +42,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Svg)
         aboutprogram.hpp aboutprogram.cpp aboutprogram.ui
         statisticswindow.hpp statisticswindow.cpp statisticswindow.ui
         resources.qrc
+        soundmanager.hpp soundmanager.cpp
         mineplacementstrategy.hpp
         nosafeplacement.hpp nosafeplacement.cpp
         clusteredplacement.cpp clusteredplacement.hpp
@@ -92,8 +93,11 @@ endif()
 target_link_libraries(MinesweeperProject PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Widgets
-    Qt${QT_VERSION_MAJOR}::Svg
 )
+
+if(WIN32)
+    target_link_libraries(MinesweeperProject PRIVATE winmm)
+endif()
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
